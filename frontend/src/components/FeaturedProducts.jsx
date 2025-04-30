@@ -1,24 +1,22 @@
 import { useEffect, useState } from "react";
 import { ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
-import { toast } from "react-hot-toast";
-import { ShoppingCart } from "lucide-react";
-import { useCartStore } from "../stores/useCartStore";
 import { useUserStore } from "../stores/useUserStore";
+import { toast } from "react-hot-toast";
 
 const FeaturedProducts = ({ featuredProducts }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const { user } = useUserStore();
-
   const { addToCart } = useCartStore();
-  const handleAddToCart = () => {
+
+  const handleAddToCart = (product) => {
     if (!user) {
       toast.error("Please login to add products to cart", { id: "login" });
       return;
     } else {
-      // add to cart
       addToCart(product);
+      toast.success(`${product.name} added to cart!`);
     }
   };
 
@@ -83,7 +81,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                         ${product.price.toFixed(2)}
                       </p>
                       <button
-                        onClick={handleAddToCart}
+                        onClick={() => handleAddToCart(product)}
                         className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"
                       >
                         <ShoppingCart className="w-5 h-5 mr-2" />
