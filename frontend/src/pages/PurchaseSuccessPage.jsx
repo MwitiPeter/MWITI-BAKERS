@@ -56,14 +56,14 @@ const PurchaseSuccessPage = () => {
             <CheckCircle className="text-[#BB86FC] w-16 h-16 mb-4" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#BB86FC] mb-2">
-            Purchase Successful!
+            This payment system is Coming soon !!!
           </h1>
 
           <p className="text-[#D3BCC7] text-center mb-2">
-            Thank you for your order. {"We're"} processing it now.
+            Click the Mpesa Checkout button in the cart page 
           </p>
           <p className="text-[#BB86FC] text-center text-sm mb-6">
-            Check your email for order details and updates.
+            Then follow the instructions to complete your purchase.
           </p>
           <div className="bg-[#3E1A47] rounded-lg p-4 mb-6">
             <div className="flex items-center justify-between mb-2">

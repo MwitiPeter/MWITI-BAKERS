@@ -16,15 +16,15 @@ const PurchaseCancelPage = () => {
             <XCircle className="text-[#BB86FC] w-16 h-16 mb-4" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#BB86FC] mb-2">
-            Purchase Cancelled
+            This payment system is Coming soon !!!
           </h1>
           <p className="text-[#D3BCC7] text-center mb-6">
             Your order has been cancelled. No charges have been made.
           </p>
           <div className="bg-[#3E1A47] rounded-lg p-4 mb-6">
             <p className="text-sm text-[#D3BCC7] text-center">
-              If you encountered any issues during the checkout process, please
-              don&apos;t hesitate to contact our support team.
+              Click the Mpesa Checkout button in the cart page to continue with
+              your purchase.
             </p>
           </div>
           <div className="space-y-4">
