@@ -1,66 +1,21 @@
-import { ArrowRight, CheckCircle, HandHeart } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowRight, XCircle, HandHeart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useCartStore } from "../stores/useCartStore";
-import axios from "../lib/axios";
-import Confetti from "react-confetti";
+import React from "react";
 
 const PurchaseSuccessPage = () => {
-  const [isProcessing, setIsProcessing] = useState(true);
-  const { clearCart } = useCartStore();
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const handleCheckoutSuccess = async (sessionId) => {
-      try {
-        await axios.post("/payments/checkout-success", {
-          sessionId,
-        });
-        clearCart();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsProcessing(false);
-      }
-    };
-
-    const sessionId = new URLSearchParams(window.location.search).get(
-      "session_id"
-    );
-    if (sessionId) {
-      handleCheckoutSuccess(sessionId);
-    } else {
-      setIsProcessing(false);
-      setError("No session ID found in the URL");
-    }
-  }, [clearCart]);
-
-  if (isProcessing) return "Processing...";
-
-  if (error) return `Error: ${error}`;
-
   return (
     <div className="h-screen flex items-center justify-center px-4">
-      <Confetti
-        width={window.innerWidth}
-        height={window.innerHeight}
-        gravity={0.1}
-        style={{ zIndex: 99 }}
-        numberOfPieces={700}
-        recycle={false}
-      />
-
       <div className="max-w-md w-full bg-[#3E1A47] rounded-lg shadow-xl overflow-hidden relative z-10">
         <div className="p-6 sm:p-8">
           <div className="flex justify-center">
-            <CheckCircle className="text-[#BB86FC] w-16 h-16 mb-4" />
+            <XCircle className="text-[#BB86FC] w-16 h-16 mb-4" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#BB86FC] mb-2">
-            This payment system is Coming soon !!!
+            This Payment System is Coming oon !!!
           </h1>
 
           <p className="text-[#D3BCC7] text-center mb-2">
-            Click the Mpesa Checkout button in the cart page 
+            You can Continue with Mpesa Checkout Button in the Cart Page
           </p>
           <p className="text-[#BB86FC] text-center text-sm mb-6">
             Then follow the instructions to complete your purchase.
@@ -83,7 +38,7 @@ const PurchaseSuccessPage = () => {
           <div className="space-y-4">
             <button
               className="w-full bg-[#9B4D96] hover:bg-[#7F3F8C] text-[#D3BCC7] font-bold py-2 px-4 
-             rounded-lg transition duration-300 flex items-center justify-center"
+              rounded-lg transition duration-300 flex items-center justify-center"
             >
               <HandHeart className="mr-2" size={18} />
               Thanks for trusting us!
@@ -91,7 +46,7 @@ const PurchaseSuccessPage = () => {
             <Link
               to={"/"}
               className="w-full bg-[#3E1A47] hover:bg-[#7F3F8C] text-[#BB86FC] font-bold py-2 px-4 
-            rounded-lg transition duration-300 flex items-center justify-center"
+              rounded-lg transition duration-300 flex items-center justify-center"
             >
               Continue Shopping
               <ArrowRight className="ml-2" size={18} />

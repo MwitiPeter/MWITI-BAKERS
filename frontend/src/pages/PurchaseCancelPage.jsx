@@ -19,12 +19,11 @@ const PurchaseCancelPage = () => {
             This payment system is Coming soon !!!
           </h1>
           <p className="text-[#D3BCC7] text-center mb-6">
-            Your order has been cancelled. No charges have been made.
+          You can Continue with Mpesa Checkout Button in the Cart Page 
           </p>
           <div className="bg-[#3E1A47] rounded-lg p-4 mb-6">
             <p className="text-sm text-[#D3BCC7] text-center">
-              Click the Mpesa Checkout button in the cart page to continue with
-              your purchase.
+            Then follow the instructions to complete your purchase.
             </p>
           </div>
           <div className="space-y-4">
