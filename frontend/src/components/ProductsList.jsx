@@ -83,8 +83,8 @@ const ProductsList = () => {
                   className={`p-1 rounded-full ${
                     product.isFeatured
                       ? "bg-[#1B1B1B] text-[#B1B1B1]"
-                      : "bg-[#0D0D0D] text-[#808080]"
-                  } hover:bg-[#2A2A2A] transition-colors duration-200`}
+                      : "bg-[#FFD700] text-[#808080]"
+                  } hover:bg-[#808080] transition-colors duration-200`}
                 >
                   <Star className="h-5 w-5 text-[#FFD700]" />
                 </button>
