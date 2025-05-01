@@ -64,7 +64,7 @@ const Footer = () => {
               <Phone size={14} /> +254713552374
             </li>
             <li className="flex items-center justify-center sm:justify-start gap-2">
-              <MapPin size={14} /> Delivery Countrywide
+              <MapPin size={14} /> Nairobi, Kenya
             </li>
           </ul>
         </div>
