@@ -6,24 +6,27 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-4 shadow-sm sm:p-6">
-      <div className="flex items-center justify-between space-x-6">
-        <div className="flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+        {/* Image */}
+        <div className="flex-shrink-0 mx-auto sm:mx-0">
           <img
-            className="h-20 w-20 rounded object-cover"
+            className="h-24 w-24 rounded object-cover"
             src={item.image}
             alt={item.name}
           />
         </div>
 
-        <div className="flex flex-1 flex-col space-y-2">
+        {/* Details */}
+        <div className="flex-1 text-center sm:text-left space-y-2">
           <p className="text-base font-medium text-gray-800 hover:text-gray-600">
             {item.name}
           </p>
           <p className="text-sm text-gray-600">{item.description}</p>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center gap-2">
+        {/* Quantity and Price */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-2">
             <button
               className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-800 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
               onClick={() => updateQuantity(item._id, item.quantity - 1)}
@@ -38,11 +41,13 @@ const CartItem = ({ item }) => {
               <Plus />
             </button>
           </div>
-
-          <p className="text-base font-bold text-gray-800">${item.price}</p>
+          <p className="text-base font-bold text-gray-800 mt-2 sm:mt-0">
+            ${item.price}
+          </p>
         </div>
 
-        <div className="flex items-center">
+        {/* Remove Button */}
+        <div className="flex justify-center sm:justify-end">
           <button
             className="inline-flex items-center text-sm font-medium text-red-500 hover:text-red-600 hover:underline"
             onClick={() => removeFromCart(item._id)}

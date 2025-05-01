@@ -6,6 +6,7 @@ import AdminPage from "./pages/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
 import Mpesa from "./pages/Mpesa";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { useUserStore } from "./stores/useUserStore";
 import { useEffect } from "react";
@@ -71,6 +72,7 @@ function App() {
             element={user ? <Mpesa /> : <Navigate to="/login" />}
           />
         </Routes>
+        <Footer />
       </div>
       <Toaster />
     </div>
