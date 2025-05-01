@@ -33,7 +33,7 @@ const Footer = () => {
               <Instagram size={18} />
             </a>
             <a
-              href="https://acey-chrochets.onrender.com"
+              href="https://acey-chrochet.onrender.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Website"
