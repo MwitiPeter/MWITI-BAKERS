@@ -5,8 +5,6 @@ import { useProductStore } from "../stores/useProductStore";
 const ProductsList = () => {
   const { deleteProduct, toggleFeaturedProduct, products } = useProductStore();
 
-  console.log("products", products);
-
   return (
     <motion.div
       className="bg-[#0D0D0D] shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto"
@@ -17,36 +15,11 @@ const ProductsList = () => {
       <table className="min-w-full divide-y divide-[#121212]">
         <thead className="bg-[#121212]">
           <tr>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider"
-            >
-              Product
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider"
-            >
-              Price
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider"
-            >
-              Category
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider"
-            >
-              Featured
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider"
-            >
-              Actions
-            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider">Product</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider">Price</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider">Category</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider">Featured</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-[#B1B1B1] uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
 
@@ -71,7 +44,7 @@ const ProductsList = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-[#B1B1B1]">
-                  ${product.price.toFixed(2)}
+                  Ksh {product.price.toFixed(2)}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">

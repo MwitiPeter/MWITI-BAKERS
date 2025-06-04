@@ -104,7 +104,7 @@ const CreateProductForm = () => {
           />
         </div>
 
-        {/* Price */}
+        {/* Price with Ksh prefix */}
         <div>
           <label
             htmlFor="price"
@@ -112,17 +112,23 @@ const CreateProductForm = () => {
           >
             Price
           </label>
-          <input
-            type="number"
-            id="price"
-            value={newProduct.price}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, price: e.target.value })
-            }
-            step="0.01"
-            className="mt-1 block w-full bg-[#1E1B2F] border border-[#4B4A6B] rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] focus:border-[#E7C9FD]"
-            required
-          />
+          <div className="relative mt-1">
+            <span className="absolute left-3 top-2.5 text-[#D1D5DB] select-none">
+              Ksh
+            </span>
+            <input
+              type="number"
+              id="price"
+              value={newProduct.price}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, price: e.target.value })
+              }
+              step="0.01"
+              min="0"
+              className="block w-full bg-[#1E1B2F] border border-[#4B4A6B] rounded-md py-2 pl-12 pr-3 text-white focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] focus:border-[#E7C9FD]"
+              required
+            />
+          </div>
         </div>
 
         {/* Category */}

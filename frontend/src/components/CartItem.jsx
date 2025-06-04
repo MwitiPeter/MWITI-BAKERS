@@ -42,7 +42,7 @@ const CartItem = ({ item }) => {
             </button>
           </div>
           <p className="text-base font-bold text-gray-800 mt-2 sm:mt-0">
-            ${item.price}
+            Ksh {item.price}
           </p>
         </div>
 

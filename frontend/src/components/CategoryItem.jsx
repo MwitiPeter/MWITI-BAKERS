@@ -15,6 +15,13 @@ const CategoryItem = ({ category }) => {
             loading="lazy"
           />
 
+          {/* If you want to display price with Ksh prefix, for example */}
+          {category.price && (
+            <div className="absolute top-4 left-4 bg-[#A758D9] text-white px-3 py-1 rounded-md text-sm font-semibold z-20 select-none">
+              Ksh {category.price}
+            </div>
+          )}
+
           {/* Enhanced text styling with better readability */}
           <div className="absolute bottom-0 left-0 right-0 p-4 z-20 bg-gradient-to-t from-[#1A1A1A] to-transparent">
             <h3 className="text-3xl font-semibold text-gray-300 mb-2 text-shadow-lg">

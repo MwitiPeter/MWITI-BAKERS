@@ -20,18 +20,23 @@ const OrderSummary = () => {
 
   const handlePayment = async () => {
     const stripe = await stripePromise;
-    const res = await axios.post("/payments/create-checkout-session", {
-      products: cart,
-      couponCode: coupon ? coupon.code : null,
-    });
 
-    const session = res.data;
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+    try {
+      const res = await axios.post("/payments/create-checkout-session", {
+        products: cart,
+        couponCode: coupon?.code || null,
+      });
 
-    if (result.error) {
-      console.error("Error:", result.error);
+      const session = res.data;
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.error("Stripe Checkout Error:", result.error.message);
+      }
+    } catch (error) {
+      console.error("Payment Initialization Failed:", error.message);
     }
   };
 
@@ -55,7 +60,7 @@ const OrderSummary = () => {
           <dl className="flex items-center justify-between gap-4">
             <dt className="text-base font-normal text-[#4A4A4A]">Original Price</dt>
             <dd className="text-base font-medium text-[#6A4C93]">
-              ${formattedSubtotal}
+              KSh {formattedSubtotal}
             </dd>
           </dl>
 
@@ -63,7 +68,7 @@ const OrderSummary = () => {
             <dl className="flex items-center justify-between gap-4">
               <dt className="text-base font-normal text-[#4A4A4A]">Savings</dt>
               <dd className="text-base font-medium text-[#FBBF24]">
-                -${formattedSavings}
+                -KSh {formattedSavings}
               </dd>
             </dl>
           )}
@@ -82,7 +87,7 @@ const OrderSummary = () => {
           <dl className="flex items-center justify-between gap-4 border-t border-[#E0E0E0] pt-2">
             <dt className="text-base font-semibold text-[#6A4C93]">Total</dt>
             <dd className="text-base font-semibold text-[#6A4C93]">
-              ${formattedTotal}
+              KSh {formattedTotal}
             </dd>
           </dl>
         </div>
@@ -96,14 +101,14 @@ const OrderSummary = () => {
           Mpesa Checkout
         </motion.button>
 
-        <motion.button
+        {/* <motion.button
           className="w-full py-3 bg-[#6A4C93] hover:bg-[#7D3BD3] text-white font-medium rounded-md shadow-md transition duration-150"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handlePayment}
         >
           Paypal and Credit Card Checkout
-        </motion.button>
+        </motion.button> */}
 
         <div className="flex items-center justify-center gap-2">
           <span className="text-sm font-normal text-[#A1A6B1]">or</span>

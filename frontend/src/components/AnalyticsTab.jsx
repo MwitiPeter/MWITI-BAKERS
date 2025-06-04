@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "../lib/axios";
-import { Users, Package, ShoppingCart, DollarSign } from "lucide-react";
+import { Users, Package, ShoppingCart, Coins } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -60,14 +60,17 @@ const AnalyticsTab = () => {
         />
         <AnalyticsCard
           title="Total Sales"
-          value={analyticsData.totalSales.toLocaleString()}
+          value={`Ksh ${analyticsData.totalSales.toLocaleString()}`}
           icon={ShoppingCart}
           color="from-[#F5E9FD] to-[#E7C9FD]"
         />
         <AnalyticsCard
           title="Total Revenue"
-          value={`$${analyticsData.totalRevenue.toLocaleString()}`}
-          icon={DollarSign}
+          value={new Intl.NumberFormat("en-KE", {
+            style: "currency",
+            currency: "KES",
+          }).format(analyticsData.totalRevenue)}
+          icon={Coins}
           color="from-[#DDB6FB] to-[#DAAFFC]"
         />
       </div>

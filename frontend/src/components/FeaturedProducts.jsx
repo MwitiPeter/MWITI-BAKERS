@@ -78,8 +78,9 @@ const FeaturedProducts = ({ featuredProducts }) => {
                         {product.name}
                       </h3>
                       <p className="text-[#A1A6B1] font-medium mb-4">
-                        ${product.price.toFixed(2)}
+                        KSh {product.price.toFixed(2)}
                       </p>
+
                       <button
                         onClick={() => handleAddToCart(product)}
                         className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"

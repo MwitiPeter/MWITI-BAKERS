@@ -67,7 +67,7 @@ const GiftCouponCard = () => {
           <h3 className="text-lg font-medium text-gray-200">Applied Coupon</h3>
 
           <p className="mt-2 text-sm text-gray-300">
-            {coupon.code} - {coupon.discountPercentage}% off
+            {coupon.code} - {coupon.discountPercentage}% off (KSh)
           </p>
 
           <motion.button
@@ -88,7 +88,7 @@ const GiftCouponCard = () => {
             Your Available Coupon:
           </h3>
           <p className="mt-2 text-sm text-gray-300">
-            {coupon.code} - {coupon.discountPercentage}% off
+            {coupon.code} - {coupon.discountPercentage}% off (KSh)
           </p>
         </div>
       )}
