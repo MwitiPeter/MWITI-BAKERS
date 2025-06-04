@@ -33,7 +33,7 @@ const Footer = () => {
               <Instagram size={18} />
             </a>
             <a
-              href="https://acey-chrochet.onrender.com"
+              href="https://acey-crochet.onrender.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Website"
@@ -58,7 +58,7 @@ const Footer = () => {
           <h3 className="text-base font-semibold">Contact Us</h3>
           <ul className="space-y-1">
             <li className="flex items-center justify-center sm:justify-start gap-2">
-              <Mail size={14} /> aceychrochets@gmail.com
+              <Mail size={14} /> aceycrochets@gmail.com
             </li>
             <li className="flex items-center justify-center sm:justify-start gap-2">
               <Phone size={14} /> +254713552374
