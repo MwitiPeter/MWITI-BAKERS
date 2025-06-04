@@ -5,17 +5,22 @@ import { useProductStore } from "../stores/useProductStore";
 import FeaturedProducts from "../components/FeaturedProducts";
 
 const categories = [
-  { href: "/retrodreams", name: "Vintro", imageUrl: "/jeans.jpg" },
-  { href: "/tops", name: "Crochet Tops", imageUrl: "/tshirts.jpg" },
-  { href: "/sweaters", name: "Crochet Sweater", imageUrl: "/shoes.jpg" },
-  { href: "/beanies&hats", name: "Beanies and Hats", imageUrl: "/glasses.png" },
   {
-    href: "/maxidresses",
-    name: "Crochet MaxiDresses",
-    imageUrl: "/jackets.jpg",
+    href: "/accesssories",
+    name: "Accessories",
+    imageUrl: "/accessories.jpg",
   },
-  { href: "/minidresses", name: "Crochet MiniDresses", imageUrl: "/suits.jpg" },
-  { href: "/bags", name: "Bags and Scrunchies", imageUrl: "/bags.jpg" },
+  { href: "/bags", name: "Bags", imageUrl: "/bags.jpg" },
+  { href: "/tops", name: "Tops", imageUrl: "/tops.jpg" },
+  { href: "/dresses", name: "Dresses", imageUrl: "/dresses.jpg" },
+  {
+    href: "/two piece set",
+    name: "Two-Piece Set",
+    imageUrl: "/twopieceset.jpg",
+  },
+  { href: "/hats", name: "Hats", imageUrl: "/hats.jpg" },
+  { href: "/baby wear", name: "Baby Wear", imageUrl: "/babywear.jpg" },
+  { href: "/beach wear", name: "Beach Wear", imageUrl: "/beachwear.jpg" },
 ];
 
 const HomePage = () => {
