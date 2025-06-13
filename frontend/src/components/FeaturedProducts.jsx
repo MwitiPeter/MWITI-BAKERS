@@ -42,7 +42,8 @@ const FeaturedProducts = ({ featuredProducts }) => {
   };
 
   const isStartDisabled = currentIndex === 0;
-  const isEndDisabled = currentIndex >= (featuredProducts?.length || 0) - itemsPerPage;
+  const isEndDisabled =
+    currentIndex >= (featuredProducts?.length || 0) - itemsPerPage;
 
   if (!featuredProducts || featuredProducts.length === 0) {
     return (
@@ -51,7 +52,9 @@ const FeaturedProducts = ({ featuredProducts }) => {
           <h2 className="text-center text-4xl sm:text-5xl font-semibold text-white mb-6">
             Featured Products
           </h2>
-          <p className="text-center text-white">No featured products available at the moment.</p>
+          <p className="text-center text-white">
+            No featured products available at the moment.
+          </p>
         </div>
       </div>
     );
@@ -79,11 +82,11 @@ const FeaturedProducts = ({ featuredProducts }) => {
                   className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 flex-shrink-0 px-3"
                 >
                   <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full transition-all duration-300 hover:shadow-2xl transform hover:scale-105">
-                    <div className="overflow-hidden">
+                    <div className="relative h-64 overflow-hidden bg-white">
                       <img
-                        src={product.images?.[0] || '/placeholder.jpg'}
+                        src={product.images?.[0] || "/placeholder.jpg"}
                         alt={product.name}
-                        className="w-full h-64 object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     <div className="p-4">
@@ -91,7 +94,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                         {product.name}
                       </h3>
                       <p className="text-[#A1A6B1] font-medium mb-4">
-                        KSh {product.price?.toFixed(2) || '0.00'}
+                        KSh {product.price?.toFixed(2) || "0.00"}
                       </p>
 
                       <button

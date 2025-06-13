@@ -9,11 +9,13 @@ const CartItem = ({ item }) => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
         {/* Image */}
         <div className="flex-shrink-0 mx-auto sm:mx-0">
-          <img
-            className="h-24 w-24 rounded object-cover"
-            src={item.images[0]}
-            alt={item.name}
-          />
+          <div className="relative h-24 w-24 bg-white rounded overflow-hidden">
+            <img
+              className="w-full h-full object-contain"
+              src={item.images[0]}
+              alt={item.name}
+            />
+          </div>
         </div>
 
         {/* Details */}

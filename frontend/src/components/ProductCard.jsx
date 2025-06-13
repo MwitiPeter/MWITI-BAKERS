@@ -19,8 +19,8 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-[hsla(274, 90%, 85%, 1)] shadow-lg">
-      <div className="relative mx-3 mt-3 h-72 overflow-hidden rounded-xl">
+    <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-[hsla(274, 90%, 85%, 1)] shadow-lg bg-white">
+      <div className="relative mx-3 mt-3 h-72 overflow-hidden rounded-xl bg-white">
         <ImageCarousel images={product.images} />
       </div>
 

@@ -27,29 +27,33 @@ const ImageCarousel = ({ images = [] }) => {
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-lg">
+    <div className="relative w-full h-full overflow-hidden rounded-lg bg-white">
       <AnimatePresence mode="wait">
-        <motion.img
+        <motion.div
           key={currentIndex}
-          src={images[currentIndex]}
-          alt={`Product image ${currentIndex + 1}`}
-          className="w-full h-full object-contain bg-white"
+          className="w-full h-full flex items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.7}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = Math.abs(offset.x) * velocity.x;
-            if (swipe < -10000) {
-              handleNext();
-            } else if (swipe > 10000) {
-              handlePrevious();
-            }
-          }}
-        />
+        >
+          <img
+            src={images[currentIndex]}
+            alt={`Product image ${currentIndex + 1}`}
+            className="max-w-full max-h-full w-auto h-auto object-contain"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.7}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = Math.abs(offset.x) * velocity.x;
+              if (swipe < -10000) {
+                handleNext();
+              } else if (swipe > 10000) {
+                handlePrevious();
+              }
+            }}
+          />
+        </motion.div>
       </AnimatePresence>
 
       {images.length > 1 && (
