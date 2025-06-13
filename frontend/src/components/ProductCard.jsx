@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { ShoppingCart } from "lucide-react";
 import { useUserStore } from "../stores/useUserStore";
 import { useCartStore } from "../stores/useCartStore";
+import ImageCarousel from "./ImageCarousel";
 
 const ProductCard = ({ product }) => {
   const { user } = useUserStore();
@@ -12,26 +13,24 @@ const ProductCard = ({ product }) => {
       toast.error("Please login to add products to cart", { id: "login" });
       return;
     } else {
-      // add to cart
       addToCart(product);
+      toast.success(`${product.name} added to cart!`);
     }
   };
 
   return (
     <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-[hsla(274, 90%, 85%, 1)] shadow-lg">
-      <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
-        <img
-          className="object-cover w-full"
-          src={product.image}
-          alt="product image"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-20" />
+      <div className="relative mx-3 mt-3 h-72 overflow-hidden rounded-xl">
+        <ImageCarousel images={product.images} />
       </div>
 
       <div className="mt-4 px-5 pb-5">
         <h5 className="text-xl font-semibold tracking-tight text-[hsla(276, 83%, 95%, 1)]">
           {product.name}
         </h5>
+        <p className="mt-2 text-sm text-[hsla(276, 83%, 85%, 1)] line-clamp-2">
+          {product.description}
+        </p>
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
             <span className="text-3xl font-bold text-[hsla(275, 93%, 89%, 1)]">

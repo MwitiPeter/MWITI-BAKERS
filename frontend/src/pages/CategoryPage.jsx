@@ -3,14 +3,34 @@ import { useProductStore } from "../stores/useProductStore";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProductCard from "../components/ProductCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const CategoryPage = () => {
-  const { fetchProductsByCategory, products } = useProductStore();
+  const { fetchProductsByCategory, products, loading, error } = useProductStore();
   const { category } = useParams();
 
   useEffect(() => {
     fetchProductsByCategory(category);
   }, [fetchProductsByCategory, category]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-red-600 mb-4">Error Loading Products</h2>
+          <p className="text-gray-600">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#E7C9FD] via-[#DAAFFC] to-[#F5E9FD] text-gray-900">
@@ -32,7 +52,7 @@ const CategoryPage = () => {
         >
           {products?.length === 0 && (
             <h2 className="text-2xl font-semibold text-[#6B7280] text-center col-span-full">
-              No products found
+              No products found in this category
             </h2>
           )}
 

@@ -11,7 +11,7 @@ const CartItem = ({ item }) => {
         <div className="flex-shrink-0 mx-auto sm:mx-0">
           <img
             className="h-24 w-24 rounded object-cover"
-            src={item.image}
+            src={item.images[0]}
             alt={item.name}
           />
         </div>

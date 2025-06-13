@@ -1,9 +1,38 @@
 import { motion } from "framer-motion";
 import { Trash, Star } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
+import { useEffect } from "react";
 
 const ProductsList = () => {
-  const { deleteProduct, toggleFeaturedProduct, products } = useProductStore();
+  const { deleteProduct, toggleFeaturedProduct, products, loading, error, fetchAllProducts } = useProductStore();
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, [fetchAllProducts]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FFD700]"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 p-4">
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="text-center text-[#B1B1B1] p-4">
+        <p>No products found</p>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -31,7 +60,7 @@ const ProductsList = () => {
                   <div className="flex-shrink-0 h-10 w-10">
                     <img
                       className="h-10 w-10 rounded-full object-cover"
-                      src={product.image}
+                      src={product.images[0]}
                       alt={product.name}
                     />
                   </div>

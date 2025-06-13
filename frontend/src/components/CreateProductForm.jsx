@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { PlusCircle, Upload, Loader } from "lucide-react";
+import { PlusCircle, Upload, Loader, X } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
+import toast from "react-hot-toast";
 
 const categories = [
   "accessories",
@@ -20,36 +21,60 @@ const CreateProductForm = () => {
     description: "",
     price: "",
     category: "",
-    image: "",
+    images: [],
   });
 
   const { createProduct, loading } = useProductStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (newProduct.images.length === 0) {
+      toast.error("Please upload at least one image");
+      return;
+    }
     try {
       await createProduct(newProduct);
+      toast.success("Product created successfully!");
       setNewProduct({
         name: "",
         description: "",
         price: "",
         category: "",
-        image: "",
+        images: [],
       });
-    } catch {
+    } catch (error) {
+      toast.error("Failed to create product");
       console.log("error creating a product");
     }
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setNewProduct({ ...newProduct, image: reader.result });
-      };
-      reader.readAsDataURL(file); // base64
+    const files = Array.from(e.target.files);
+    
+    if (newProduct.images.length + files.length > 3) {
+      toast.error("Maximum 3 images allowed");
+      return;
     }
+
+    files.forEach(file => {
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setNewProduct(prev => ({
+            ...prev,
+            images: [...prev.images, reader.result]
+          }));
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  };
+
+  const removeImage = (index) => {
+    setNewProduct(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
   };
 
   return (
@@ -158,23 +183,54 @@ const CreateProductForm = () => {
         </div>
 
         {/* Image Upload */}
-        <div className="mt-1 flex items-center">
-          <input
-            type="file"
-            id="image"
-            className="sr-only"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          <label
-            htmlFor="image"
-            className="cursor-pointer bg-[#1E1B2F] py-2 px-3 border border-[#4B4A6B] rounded-md shadow-sm text-sm font-medium text-[#D1D5DB] hover:bg-[#4A3A65] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E7C9FD]"
-          >
-            <Upload className="h-5 w-5 inline-block mr-2" />
-            Upload Image
-          </label>
-          {newProduct.image && (
-            <span className="ml-3 text-sm text-[#E7C9FD]">Image uploaded</span>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <label className="block text-sm font-medium text-[#D1D5DB]">
+              Images (Max 3)
+            </label>
+            <span className="text-sm text-[#D1D5DB]">
+              {newProduct.images.length}/3
+            </span>
+          </div>
+          
+          {/* Preview Images */}
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            {newProduct.images.map((image, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={image}
+                  alt={`Preview ${index + 1}`}
+                  className="w-full h-24 object-cover rounded-lg"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeImage(index)}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {newProduct.images.length < 3 && (
+            <div className="mt-1 flex items-center">
+              <input
+                type="file"
+                id="images"
+                className="sr-only"
+                accept="image/*"
+                multiple
+                onChange={handleImageChange}
+              />
+              <label
+                htmlFor="images"
+                className="cursor-pointer bg-[#1E1B2F] py-2 px-3 border border-[#4B4A6B] rounded-md shadow-sm text-sm font-medium text-[#D1D5DB] hover:bg-[#4A3A65] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E7C9FD]"
+              >
+                <Upload className="h-5 w-5 inline-block mr-2" />
+                Upload Images
+              </label>
+            </div>
           )}
         </div>
 

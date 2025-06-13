@@ -42,7 +42,20 @@ const FeaturedProducts = ({ featuredProducts }) => {
   };
 
   const isStartDisabled = currentIndex === 0;
-  const isEndDisabled = currentIndex >= featuredProducts.length - itemsPerPage;
+  const isEndDisabled = currentIndex >= (featuredProducts?.length || 0) - itemsPerPage;
+
+  if (!featuredProducts || featuredProducts.length === 0) {
+    return (
+      <div className="py-16 bg-gradient-to-b from-[#1E1B2F] to-[#2D2A41]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center text-4xl sm:text-5xl font-semibold text-white mb-6">
+            Featured Products
+          </h2>
+          <p className="text-center text-white">No featured products available at the moment.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-16 bg-gradient-to-b from-[#1E1B2F] to-[#2D2A41]">
@@ -60,7 +73,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                 }%)`,
               }}
             >
-              {featuredProducts?.map((product) => (
+              {featuredProducts.map((product) => (
                 <div
                   key={product._id}
                   className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 flex-shrink-0 px-3"
@@ -68,7 +81,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                   <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full transition-all duration-300 hover:shadow-2xl transform hover:scale-105">
                     <div className="overflow-hidden">
                       <img
-                        src={product.image}
+                        src={product.images?.[0] || '/placeholder.jpg'}
                         alt={product.name}
                         className="w-full h-64 object-cover transition-transform duration-300 ease-in-out hover:scale-110"
                       />
@@ -78,7 +91,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                         {product.name}
                       </h3>
                       <p className="text-[#A1A6B1] font-medium mb-4">
-                        KSh {product.price.toFixed(2)}
+                        KSh {product.price?.toFixed(2) || '0.00'}
                       </p>
 
                       <button
