@@ -80,7 +80,7 @@ const HomePage = () => {
         </motion.div>
 
         {/* Featured Products */}
-        {!isLoading && products.length > 0 && (
+        {!isLoading && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -90,7 +90,13 @@ const HomePage = () => {
             <h2 className="text-3xl font-bold text-center text-purple-700 mb-8">
               Featured Products
             </h2>
-            <FeaturedProducts featuredProducts={products} />
+            {products.length > 0 ? (
+              <FeaturedProducts featuredProducts={products} />
+            ) : (
+              <p className="text-center text-gray-600">
+                No featured products available at the moment.
+              </p>
+            )}
           </motion.div>
         )}
       </div>

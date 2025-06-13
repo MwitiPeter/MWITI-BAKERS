@@ -14,24 +14,17 @@ export const getAllProducts = async (req, res) => {
 
 export const getFeaturedProducts = async (req, res) => {
   try {
-    let featuredProducts = await redis.get("featured_products");
-    if (featuredProducts) {
-      return res.json(JSON.parse(featuredProducts));
+    // Always fetch from MongoDB first to ensure we have the latest data
+    const featuredProducts = await Product.find({ isFeatured: true }).lean();
+
+    // Update the Redis cache with the latest data
+    if (featuredProducts.length === 0) {
+      await redis.del("featured_products");
+      return res.json([]);
     }
 
-    // if not in redis, fetch from mongodb
-    // .lean() is gonna return a plain javascript object instead of a mongodb document
-    // which is good for performance
-    featuredProducts = await Product.find({ isFeatured: true }).lean();
-
-    if (!featuredProducts) {
-      return res.status(404).json({ message: "No featured products found" });
-    }
-
-    // store in redis for future quick access
-
+    // Store in redis for future quick access
     await redis.set("featured_products", JSON.stringify(featuredProducts));
-
     res.json(featuredProducts);
   } catch (error) {
     console.log("Error in getFeaturedProducts controller", error.message);
