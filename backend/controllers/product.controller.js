@@ -113,7 +113,7 @@ export const getRecommendedProducts = async (req, res) => {
           _id: 1,
           name: 1,
           description: 1,
-          image: 1,
+          images: 1,
           price: 1,
         },
       },
