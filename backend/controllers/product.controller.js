@@ -1,6 +1,7 @@
 import { redis } from "../lib/redis.js";
 import cloudinary from "../lib/cloudinary.js";
 import Product from "../models/product.model.js";
+import mongoose from "mongoose";
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -104,16 +105,39 @@ export const deleteProduct = async (req, res) => {
 
 export const getRecommendedProducts = async (req, res) => {
   try {
-    const { category } = req.query; // Get category from query parameters
-    
-    const pipeline = [
-      { $sample: { size: 4 } },
-      { $project: { _id: 1, name: 1, description: 1, images: 1, price: 1 } },
-    ];
+    // Get categories and excluded product IDs from query parameters
+    // req.query.categories and req.query.excludedIds can be strings or arrays
+    const categories = Array.isArray(req.query.categories)
+      ? req.query.categories
+      : req.query.categories
+      ? [req.query.categories]
+      : [];
 
-    if (category) {
-      pipeline.unshift({ $match: { category: category } }); // Add match stage if category is provided
+    const excludedIds = Array.isArray(req.query.excludedIds)
+      ? req.query.excludedIds.map((id) => new mongoose.Types.ObjectId(id))
+      : req.query.excludedIds
+      ? [new mongoose.Types.ObjectId(req.query.excludedIds)]
+      : [];
+
+    const pipeline = [];
+
+    // 1. Match by categories if provided
+    if (categories.length > 0) {
+      pipeline.push({ $match: { category: { $in: categories } } });
     }
+
+    // 2. Exclude products already in the cart
+    if (excludedIds.length > 0) {
+      pipeline.push({ $match: { _id: { $nin: excludedIds } } });
+    }
+
+    // 3. Sample (randomize) products from the filtered set
+    pipeline.push({ $sample: { size: 4 } });
+
+    // 4. Project required fields
+    pipeline.push({
+      $project: { _id: 1, name: 1, description: 1, images: 1, price: 1 },
+    });
 
     const products = await Product.aggregate(pipeline);
 

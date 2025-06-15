@@ -4,14 +4,22 @@ import axios from "../lib/axios";
 import toast from "react-hot-toast";
 import LoadingSpinner from "./LoadingSpinner";
 
-const PeopleAlsoBought = ({ category }) => {
+const PeopleAlsoBought = ({ categories, excludedProductIds }) => {
   const [recommendations, setRecommendations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const url = category ? `/products/recommendations?category=${category}` : "/products/recommendations";
+        const params = new URLSearchParams();
+        if (categories && categories.length > 0) {
+          categories.forEach((cat) => params.append("categories", cat));
+        }
+        if (excludedProductIds && excludedProductIds.length > 0) {
+          excludedProductIds.forEach((id) => params.append("excludedIds", id));
+        }
+
+        const url = `/products/recommendations?${params.toString()}`;
         const res = await axios.get(url);
         setRecommendations(res.data);
       } catch (error) {
@@ -25,7 +33,7 @@ const PeopleAlsoBought = ({ category }) => {
     };
 
     fetchRecommendations();
-  }, [category]);
+  }, [categories, excludedProductIds]);
 
   if (isLoading) return <LoadingSpinner />;
 
