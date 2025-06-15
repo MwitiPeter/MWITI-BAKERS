@@ -36,9 +36,9 @@ function App() {
       {/* Background gradient fallback layer */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 pointer-events-none z-0" />
 
-      <div className="relative z-50 flex-grow">
+      <div className="relative z-50 flex flex-col min-h-screen">
         <Navbar />
-        <main className="pt-24">
+        <main className="flex-grow pt-24">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
@@ -74,8 +74,8 @@ function App() {
             />
           </Routes>
         </main>
+        <Footer />
       </div>
-      <Footer />
       <Toaster />
     </div>
   );
