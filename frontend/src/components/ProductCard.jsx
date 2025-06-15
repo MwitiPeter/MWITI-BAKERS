@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
     if (product.image) {
       return [product.image];
     }
-    return ['/images/placeholder.jpg'];
+    return ["/images/placeholder.svg"];
   };
 
   return (
