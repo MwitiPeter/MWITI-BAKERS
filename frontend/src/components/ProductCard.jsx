@@ -18,10 +18,21 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  // Handle image display with fallback
+  const getProductImages = () => {
+    if (Array.isArray(product.images) && product.images.length > 0) {
+      return product.images;
+    }
+    if (product.image) {
+      return [product.image];
+    }
+    return ['/images/placeholder.jpg'];
+  };
+
   return (
     <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-[hsla(274, 90%, 85%, 1)] shadow-lg bg-white">
       <div className="relative mx-3 mt-3 h-72 overflow-hidden rounded-xl bg-white">
-        <ImageCarousel images={product.images} />
+        <ImageCarousel images={getProductImages()} />
       </div>
 
       <div className="mt-4 px-5 pb-5">

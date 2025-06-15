@@ -32,48 +32,50 @@ function App() {
   if (checkingAuth) return <LoadingSpinner />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 text-[#4B0082] relative overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 text-[#4B0082] relative overflow-hidden">
       {/* Background gradient fallback layer */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 pointer-events-none z-0" />
 
-      <div className="relative z-50 pt-24">
+      <div className="relative z-50 flex-grow">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/signup"
-            element={!user ? <SignUpPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/login"
-            element={!user ? <LoginPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/secret-dashboard"
-            element={
-              user?.role === "admin" ? <AdminPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route path="/category/:category" element={<CategoryPage />} />
-          <Route
-            path="/cart"
-            element={user ? <CartPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/purchase-success"
-            element={user ? <PurchaseSuccessPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/purchase-cancel"
-            element={user ? <PurchaseCancelPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/mpesa"
-            element={user ? <Mpesa /> : <Navigate to="/login" />}
-          />
-        </Routes>
-        <Footer />
+        <main className="pt-24">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/signup"
+              element={!user ? <SignUpPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <LoginPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/secret-dashboard"
+              element={
+                user?.role === "admin" ? <AdminPage /> : <Navigate to="/login" />
+              }
+            />
+            <Route path="/category/:category" element={<CategoryPage />} />
+            <Route
+              path="/cart"
+              element={user ? <CartPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/purchase-success"
+              element={user ? <PurchaseSuccessPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/purchase-cancel"
+              element={user ? <PurchaseCancelPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/mpesa"
+              element={user ? <Mpesa /> : <Navigate to="/login" />}
+            />
+          </Routes>
+        </main>
       </div>
+      <Footer />
       <Toaster />
     </div>
   );

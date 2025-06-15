@@ -14,7 +14,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#F5E9FF] text-[#1E1B2F] border-t border-[#D7B8FB] mt-10 text-sm relative">
+    <footer className="bg-[#F5E9FF] text-[#1E1B2F] border-t border-[#D7B8FB] w-full">
       <div className="container mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {/* Brand Info */}
         <div className="space-y-2 text-center sm:text-left">
@@ -82,7 +82,7 @@ const Footer = () => {
       {/* Back to Top Button */}
       <button
         onClick={handleScrollTop}
-        className="absolute right-4 bottom-12 md:bottom-6 bg-[#6A3D9A] hover:bg-[#4C9D6C] text-white p-2 rounded-full shadow-md transition"
+        className="fixed right-4 bottom-20 md:bottom-6 bg-[#6A3D9A] hover:bg-[#4C9D6C] text-white p-2 rounded-full shadow-md transition z-50"
         aria-label="Back to Top"
       >
         <ArrowUp size={16} />

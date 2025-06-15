@@ -90,7 +90,7 @@ const HomePage = () => {
             <h2 className="text-3xl font-bold text-center text-purple-700 mb-8">
               Featured Products
             </h2>
-            {products.length > 0 ? (
+            {products && products.length > 0 ? (
               <FeaturedProducts featuredProducts={products} />
             ) : (
               <p className="text-center text-gray-600">
