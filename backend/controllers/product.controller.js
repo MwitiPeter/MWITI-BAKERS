@@ -104,20 +104,18 @@ export const deleteProduct = async (req, res) => {
 
 export const getRecommendedProducts = async (req, res) => {
   try {
-    const products = await Product.aggregate([
-      {
-        $sample: { size: 4 },
-      },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          description: 1,
-          images: 1,
-          price: 1,
-        },
-      },
-    ]);
+    const { category } = req.query; // Get category from query parameters
+    
+    const pipeline = [
+      { $sample: { size: 4 } },
+      { $project: { _id: 1, name: 1, description: 1, images: 1, price: 1 } },
+    ];
+
+    if (category) {
+      pipeline.unshift({ $match: { category: category } }); // Add match stage if category is provided
+    }
+
+    const products = await Product.aggregate(pipeline);
 
     res.json(products);
   } catch (error) {

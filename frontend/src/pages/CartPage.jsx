@@ -10,6 +10,9 @@ import GiftCouponCard from "../components/GiftCouponCard";
 const CartPage = () => {
   const { cart } = useCartStore();
 
+  // Determine a category for recommendations based on cart items
+  const recommendationCategory = cart.length > 0 ? cart[0].category : null;
+
   return (
     <div className="py-8 md:py-16 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#E7C9FD] via-[#DAAFFC] to-[#F5E9FD] min-h-screen text-gray-900">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -29,7 +32,9 @@ const CartPage = () => {
                 ))}
               </div>
             )}
-            {cart.length > 0 && <PeopleAlsoBought />}
+            {cart.length > 0 && (
+              <PeopleAlsoBought category={recommendationCategory} />
+            )}
           </motion.div>
 
           {cart.length > 0 && (
