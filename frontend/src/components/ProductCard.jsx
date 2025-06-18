@@ -30,31 +30,34 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-[hsla(274, 90%, 85%, 1)] shadow-lg bg-white">
-      <div className="relative mx-3 mt-3 h-72 overflow-hidden rounded-xl bg-white">
-        <ImageCarousel images={getProductImages()} />
+    <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-[hsla(274, 90%, 85%, 1)] shadow-lg bg-white hover:shadow-xl transition-all duration-300">
+      <div className="relative mx-3 mt-3 overflow-hidden rounded-xl bg-white">
+        <ImageCarousel 
+          images={getProductImages()} 
+          aspectRatio="3/4"
+        />
       </div>
 
-      <div className="mt-4 px-5 pb-5">
-        <h5 className="text-xl font-semibold tracking-tight text-[hsla(276, 83%, 95%, 1)]">
+      <div className="mt-4 px-5 pb-5 flex-1 flex flex-col">
+        <h5 className="text-lg sm:text-xl font-semibold tracking-tight text-[hsla(276, 83%, 95%, 1)] line-clamp-2">
           {product.name}
         </h5>
-        <p className="mt-2 text-sm text-[hsla(276, 83%, 85%, 1)] line-clamp-2">
+        <p className="mt-2 text-sm text-[hsla(276, 83%, 85%, 1)] line-clamp-2 flex-1">
           {product.description}
         </p>
-        <div className="mt-2 mb-5 flex items-center justify-between">
+        <div className="mt-3 mb-4 flex items-center justify-between">
           <p>
-            <span className="text-3xl font-bold text-[hsla(275, 93%, 89%, 1)]">
+            <span className="text-2xl sm:text-3xl font-bold text-[hsla(275, 93%, 89%, 1)]">
               KSh {product.price}
             </span>
           </p>
         </div>
         <button
-          className="flex items-center justify-center rounded-lg bg-[hsla(276, 83%, 95%, 1)] px-5 py-2.5 text-center text-sm font-medium 
-           text-[hsla(274, 90%, 85%, 1)] hover:bg-[hsla(276, 83%, 95%, 1)] focus:outline-none focus:ring-4 focus:ring-[hsla(275, 93%, 89%, 1)]"
+          className="flex items-center justify-center rounded-lg bg-[hsla(276, 83%, 95%, 1)] px-4 py-2.5 text-center text-sm font-medium 
+           text-[hsla(274, 90%, 85%, 1)] hover:bg-[hsla(276, 83%, 95%, 1)] focus:outline-none focus:ring-4 focus:ring-[hsla(275, 93%, 89%, 1)] transition-all duration-200 hover:scale-105"
           onClick={handleAddToCart}
         >
-          <ShoppingCart size={22} className="mr-2" />
+          <ShoppingCart size={20} className="mr-2" />
           Add to cart
         </button>
       </div>

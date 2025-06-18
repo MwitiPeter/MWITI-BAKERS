@@ -196,11 +196,17 @@ const CreateProductForm = () => {
           {/* Preview Images */}
           <div className="grid grid-cols-3 gap-4 mb-4">
             {newProduct.images.map((image, index) => (
-              <div key={index} className="relative">
+              <div key={index} className="relative bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center" style={{ aspectRatio: "3/4" }}>
                 <img
                   src={image}
                   alt={`Preview ${index + 1}`}
-                  className="w-full h-24 object-cover rounded-lg"
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                  style={{ 
+                    maxWidth: '100%', 
+                    maxHeight: '100%',
+                    width: 'auto',
+                    height: 'auto'
+                  }}
                 />
                 <button
                   type="button"

@@ -81,27 +81,37 @@ const FeaturedProducts = ({ featuredProducts }) => {
                   key={product._id}
                   className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 flex-shrink-0 px-3"
                 >
-                  <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full transition-all duration-300 hover:shadow-2xl transform hover:scale-105">
-                    <div className="relative h-64 overflow-hidden bg-white">
+                  <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full transition-all duration-300 hover:shadow-2xl">
+                    <div className="relative overflow-hidden bg-gray-50 flex items-center justify-center p-2" style={{ aspectRatio: "3/4" }}>
                       <img
-                        src={product.images?.[0] || "/placeholder.jpg"}
+                        src={product.images?.[0] || "/images/placeholder.svg"}
                         alt={product.name}
-                        className="w-full h-full object-contain"
+                        className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.src = "/images/placeholder.svg";
+                        }}
+                        style={{ 
+                          maxWidth: '100%', 
+                          maxHeight: '100%',
+                          width: 'auto',
+                          height: 'auto'
+                        }}
                       />
                     </div>
-                    <div className="p-4">
-                      <h3 className="text-xl font-semibold text-white mb-2">
+                    <div className="p-4 flex flex-col h-full">
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 line-clamp-2">
                         {product.name}
                       </h3>
-                      <p className="text-[#A1A6B1] font-medium mb-4">
+                      <p className="text-[#A1A6B1] font-medium mb-4 flex-1">
                         KSh {product.price?.toFixed(2) || "0.00"}
                       </p>
 
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                        className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
                       >
-                        <ShoppingCart className="w-5 h-5 mr-2" />
+                        <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Add to Cart
                       </button>
                     </div>
@@ -115,26 +125,26 @@ const FeaturedProducts = ({ featuredProducts }) => {
           <button
             onClick={prevSlide}
             disabled={isStartDisabled}
-            className={`absolute top-1/2 -left-6 transform -translate-y-1/2 p-3 rounded-full transition-colors duration-300 ${
+            className={`absolute top-1/2 -left-6 transform -translate-y-1/2 p-2 sm:p-3 rounded-full transition-all duration-300 ${
               isStartDisabled
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#A78BFA] hover:bg-[#8B5CF6]"
+                : "bg-[#A78BFA] hover:bg-[#8B5CF6] hover:scale-110"
             }`}
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </button>
 
           {/* Right Arrow Button */}
           <button
             onClick={nextSlide}
             disabled={isEndDisabled}
-            className={`absolute top-1/2 -right-6 transform -translate-y-1/2 p-3 rounded-full transition-colors duration-300 ${
+            className={`absolute top-1/2 -right-6 transform -translate-y-1/2 p-2 sm:p-3 rounded-full transition-all duration-300 ${
               isEndDisabled
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#A78BFA] hover:bg-[#8B5CF6]"
+                : "bg-[#A78BFA] hover:bg-[#8B5CF6] hover:scale-110"
             }`}
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </button>
         </div>
       </div>
