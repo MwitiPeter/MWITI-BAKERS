@@ -18,7 +18,7 @@ import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
-  const { getCartItems } = useCartStore();
+  const { getCartItems, calculateTotals } = useCartStore();
 
   useEffect(() => {
     checkAuth();
@@ -28,6 +28,11 @@ function App() {
     if (!user) return;
     getCartItems();
   }, [getCartItems, user]);
+
+  // Calculate totals whenever cart changes (for persisted data)
+  useEffect(() => {
+    calculateTotals();
+  }, [calculateTotals]);
 
   if (checkingAuth) return <LoadingSpinner />;
 
@@ -52,7 +57,11 @@ function App() {
             <Route
               path="/secret-dashboard"
               element={
-                user?.role === "admin" ? <AdminPage /> : <Navigate to="/login" />
+                user?.role === "admin" ? (
+                  <AdminPage />
+                ) : (
+                  <Navigate to="/login" />
+                )
               }
             />
             <Route path="/category/:category" element={<CategoryPage />} />
@@ -62,7 +71,9 @@ function App() {
             />
             <Route
               path="/purchase-success"
-              element={user ? <PurchaseSuccessPage /> : <Navigate to="/login" />}
+              element={
+                user ? <PurchaseSuccessPage /> : <Navigate to="/login" />
+              }
             />
             <Route
               path="/purchase-cancel"

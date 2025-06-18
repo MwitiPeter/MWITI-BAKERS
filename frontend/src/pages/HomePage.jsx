@@ -24,7 +24,7 @@ const categories = [
 ];
 
 const HomePage = () => {
-  const { fetchFeaturedProducts, products, isLoading } = useProductStore();
+  const { fetchFeaturedProducts, products, loading } = useProductStore();
 
   useEffect(() => {
     fetchFeaturedProducts();
@@ -80,7 +80,7 @@ const HomePage = () => {
         </motion.div>
 
         {/* Featured Products */}
-        {!isLoading && (
+        {!loading && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
