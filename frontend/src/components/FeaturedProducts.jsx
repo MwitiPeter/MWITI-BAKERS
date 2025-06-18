@@ -81,7 +81,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                   key={product._id}
                   className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 flex-shrink-0 px-3"
                 >
-                  <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full transition-all duration-300 hover:shadow-2xl">
+                  <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full flex flex-col justify-between min-h-[400px] transition-all duration-300 hover:shadow-2xl">
                     <div className="relative overflow-hidden bg-gray-50 flex items-center justify-center p-2" style={{ aspectRatio: "3/4" }}>
                       <img
                         src={product.images?.[0] || "/images/placeholder.svg"}
@@ -99,17 +99,18 @@ const FeaturedProducts = ({ featuredProducts }) => {
                         }}
                       />
                     </div>
-                    <div className="p-4 flex flex-col h-full">
-                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 line-clamp-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-[#A1A6B1] font-medium mb-4 flex-1">
-                        KSh {product.price?.toFixed(2) || "0.00"}
-                      </p>
-
+                    <div className="p-4 flex flex-col flex-1 justify-between h-full">
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 line-clamp-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-[#A1A6B1] font-medium mb-4">
+                          KSh {product.price?.toFixed(2) || "0.00"}
+                        </p>
+                      </div>
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
+                        className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105 mt-auto border-2 border-red-500 bg-red-200"
                       >
                         <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Add to Cart
