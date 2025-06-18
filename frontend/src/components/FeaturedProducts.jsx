@@ -110,7 +110,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                       </div>
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className="w-full bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105 mt-auto border-2 border-red-500 bg-red-200"
+                        className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105 mt-auto shadow-lg hover:shadow-xl"
                       >
                         <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Add to Cart
