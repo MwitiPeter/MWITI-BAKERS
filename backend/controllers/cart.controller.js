@@ -1,16 +1,20 @@
 import Product from "../models/product.model.js";
+import mongoose from "mongoose";
 
 export const getCartProducts = async (req, res) => {
   try {
+    // Filter out any old string entries in cartItems
+    req.user.cartItems = req.user.cartItems.filter(item => typeof item === 'object' && item.product);
+    await req.user.save();
     // Populate product details for each cart item
     await req.user.populate({
       path: "cartItems.product",
-      model: "Product",
+      model: "Product"
     });
     const cartItems = req.user.cartItems.map((item) => {
       return {
         ...item.product.toJSON(),
-        quantity: item.quantity,
+        quantity: item.quantity
       };
     });
     res.json(cartItems);
@@ -23,7 +27,12 @@ export const getCartProducts = async (req, res) => {
 export const addToCart = async (req, res) => {
   try {
     const { productId } = req.body;
+    if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid or missing productId" });
+    }
     const user = req.user;
+    // Filter out any old string entries in cartItems
+    user.cartItems = user.cartItems.filter(item => typeof item === 'object' && item.product);
     const existingItem = user.cartItems.find(
       (item) => item.product.toString() === productId
     );
@@ -35,7 +44,7 @@ export const addToCart = async (req, res) => {
     await user.save();
     res.json(user.cartItems);
   } catch (error) {
-    console.log("Error in addToCart controller", error.message);
+    console.log("Error in addToCart controller", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
@@ -44,6 +53,8 @@ export const removeAllFromCart = async (req, res) => {
   try {
     const { productId } = req.body;
     const user = req.user;
+    // Filter out any old string entries in cartItems
+    user.cartItems = user.cartItems.filter(item => typeof item === 'object' && item.product);
     if (!productId) {
       user.cartItems = [];
     } else {
@@ -63,6 +74,8 @@ export const updateQuantity = async (req, res) => {
     const { id: productId } = req.params;
     const { quantity } = req.body;
     const user = req.user;
+    // Filter out any old string entries in cartItems
+    user.cartItems = user.cartItems.filter(item => typeof item === 'object' && item.product);
     const existingItem = user.cartItems.find(
       (item) => item.product.toString() === productId
     );
@@ -81,7 +94,7 @@ export const updateQuantity = async (req, res) => {
       res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
-    console.log("Error in updateQuantity controller", error.message);
+    console.log("Error in updateQuantity controller", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
