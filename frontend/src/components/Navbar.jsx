@@ -14,13 +14,13 @@ const Navbar = () => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 w-full bg-[#E7C9FD] bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-[#E0B8FD]"
+      className="fixed top-0 left-0 w-full bg-white bg-opacity-95 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-purple-200"
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex flex-wrap justify-between items-center">
           <Link
             to="/"
-            className="text-2xl font-bold text-[#1E1B2F] items-center space-x-2 flex"
+            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent items-center space-x-2 flex"
           >
             Acey Crochets
           </Link>
@@ -28,7 +28,7 @@ const Navbar = () => {
           <nav className="flex flex-wrap items-center gap-4">
             <Link
               to="/"
-              className="text-[#2D2A41] hover:text-[#4C9D6C] transition duration-300 ease-in-out"
+              className="text-gray-700 hover:text-purple-600 transition duration-300 ease-in-out font-medium"
             >
               Home
             </Link>
@@ -36,15 +36,12 @@ const Navbar = () => {
             {user && (
               <Link
                 to="/cart"
-                className="relative group text-[#2D2A41] hover:text-[#4C9D6C] transition duration-300 ease-in-out"
+                className="relative group bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center shadow-lg hover:shadow-xl hover:scale-105"
               >
-                <ShoppingCart
-                  className="inline-block mr-1 group-hover:text-[#4C9D6C]"
-                  size={20}
-                />
-                <span className="hidden sm:inline">Cart</span>
+                <ShoppingCart className="inline-block mr-2" size={20} />
+                <span className="hidden sm:inline font-medium">Cart</span>
                 {cart.length > 0 && (
-                  <span className="absolute -top-2 -left-2 bg-[#2D2A41] text-white rounded-full px-2 py-0.5 text-xs group-hover:bg-[#E0B8FD] transition duration-300 ease-in-out">
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-bold">
                     {cart.length}
                   </span>
                 )}
@@ -54,9 +51,9 @@ const Navbar = () => {
             {isAdmin && (
               <Link
                 to="/secret-dashboard"
-                className="bg-[#DAAFFC] hover:bg-[#2D2A41] text-white px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 ease-in-out flex items-center shadow-lg hover:shadow-xl hover:scale-105"
               >
-                <Lock className="inline-block mr-1" size={18} />
+                <Lock className="inline-block mr-2" size={18} />
                 <span className="hidden sm:inline">Dashboard</span>
               </Link>
             )}
@@ -64,26 +61,28 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={logout}
-                className="bg-[#DAAFFC] hover:bg-[#2D2A41] text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out"
+                className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-2 px-4 rounded-lg flex items-center transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl hover:scale-105"
               >
                 <LogOut size={18} />
-                <span className="hidden sm:inline ml-2">Log Out</span>
+                <span className="hidden sm:inline ml-2 font-medium">
+                  Log Out
+                </span>
               </button>
             ) : (
               <>
                 <Link
                   to="/signup"
-                  className="bg-[#2D2A41] hover:bg-[#1E1B2F] text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 px-4 rounded-lg flex items-center transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl hover:scale-105"
                 >
                   <UserPlus className="mr-2" size={18} />
-                  Sign Up
+                  <span className="font-medium">Sign Up</span>
                 </Link>
                 <Link
                   to="/login"
-                  className="bg-[#2D2A41] hover:bg-[#1E1B2F] text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out"
+                  className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-2 px-4 rounded-lg flex items-center transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl hover:scale-105"
                 >
                   <LogIn className="mr-2" size={18} />
-                  Login
+                  <span className="font-medium">Login</span>
                 </Link>
               </>
             )}
