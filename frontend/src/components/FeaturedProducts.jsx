@@ -3,6 +3,7 @@ import { ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
 import { useUserStore } from "../stores/useUserStore";
 import { toast } from "react-hot-toast";
+import ImageCarousel from "./ImageCarousel";
 
 const FeaturedProducts = ({ featuredProducts }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -83,21 +84,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                 >
                   <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden h-full flex flex-col justify-between min-h-[400px] transition-all duration-300 hover:shadow-2xl">
                     <div className="relative overflow-hidden bg-gray-50 flex items-center justify-center p-2" style={{ aspectRatio: "3/4" }}>
-                      <img
-                        src={product.images?.[0] || "/images/placeholder.svg"}
-                        alt={product.name}
-                        className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300"
-                        loading="lazy"
-                        onError={(e) => {
-                          e.target.src = "/images/placeholder.svg";
-                        }}
-                        style={{ 
-                          maxWidth: '100%', 
-                          maxHeight: '100%',
-                          width: 'auto',
-                          height: 'auto'
-                        }}
-                      />
+                      <ImageCarousel images={product.images || ["/images/placeholder.svg"]} aspectRatio="3/4" />
                     </div>
                     <div className="p-4 flex flex-col flex-1 justify-between h-full">
                       <div>

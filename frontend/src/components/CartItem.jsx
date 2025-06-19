@@ -1,5 +1,6 @@
 import { Minus, Plus, Trash } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
+import ImageCarousel from "./ImageCarousel";
 
 const CartItem = ({ item }) => {
   const { removeFromCart, updateQuantity } = useCartStore();
@@ -13,19 +14,13 @@ const CartItem = ({ item }) => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
         {/* Image */}
         <div className="flex-shrink-0 mx-auto sm:mx-0">
-          <div className="relative bg-gray-50 rounded-lg overflow-hidden shadow-md flex items-center justify-center p-2" style={{ aspectRatio: "1/1", width: "96px" }}>
-            <img
-              className="max-w-full max-h-full object-contain rounded"
-              src={item.images?.[0] || "/images/placeholder.svg"}
-              alt={item.name}
-              onError={handleImageError}
-              loading="lazy"
-              style={{ 
-                maxWidth: '100%', 
-                maxHeight: '100%',
-                width: 'auto',
-                height: 'auto'
-              }}
+          <div
+            className="relative bg-gray-50 rounded-lg overflow-hidden shadow-md flex items-center justify-center p-2"
+            style={{ aspectRatio: "1/1", width: "200px", height: "200px", maxWidth: "100%" }}
+          >
+            <ImageCarousel
+              images={item.images || ["/images/placeholder.svg"]}
+              aspectRatio="1/1"
             />
           </div>
         </div>
