@@ -11,12 +11,14 @@ export const getCartProducts = async (req, res) => {
       path: "cartItems.product",
       model: "Product"
     });
-    const cartItems = req.user.cartItems.map((item) => {
-      return {
-        ...item.product.toJSON(),
-        quantity: item.quantity
-      };
-    });
+    const cartItems = req.user.cartItems
+      .filter(item => item.product && typeof item.product.toJSON === 'function')
+      .map((item) => {
+        return {
+          ...item.product.toJSON(),
+          quantity: item.quantity
+        };
+      });
     res.json(cartItems);
   } catch (error) {
     console.log("Error in getCartProducts controller", error.message);
