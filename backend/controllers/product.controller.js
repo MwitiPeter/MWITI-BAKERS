@@ -150,8 +150,12 @@ export const getRecommendedProducts = async (req, res) => {
 
 export const getProductsByCategory = async (req, res) => {
   try {
-    const { category } = req.params;
-    const products = await Product.find({ category: category.toLowerCase() });
+    // Trim whitespace and escape regex special characters
+    const category = req.params.category.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Case-insensitive, whitespace-insensitive match
+    const products = await Product.find({
+      category: { $regex: new RegExp(`^\\s*${category}\\s*$`, 'i') }
+    });
     res.json({ products });
   } catch (error) {
     console.log("Error in getProductsByCategory controller", error.message);
