@@ -6,7 +6,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 
 const categories = [
   {
-    href: "/accesssories",
+    href: "/accessories",
     name: "Accessories",
     imageUrl: "/accessories.jpg",
   },
