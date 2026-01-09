@@ -1,6 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --navy-900: #0b1f3a;
+  --navy-800: #0f2d52;
+  --navy-700: #123869;
+  --cream-50: #f7f8ff;
+  --cream-100: #e9eef7;
+  --accent-gold: #f8c35c;
+  --accent-mint: #8ad1c2;
+}
+
+body {
+  font-family: 'Manrope', 'Fredoka', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 20% 20%, rgba(248, 195, 92, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(138, 209, 194, 0.12), transparent 30%),
+    linear-gradient(135deg, var(--navy-900), var(--navy-800));
+  color: var(--cream-50);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+}
+
+.pill-button {
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 150ms ease, box-shadow 200ms ease;
+}
+
+.pill-button:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
 
 /* Custom utilities for responsive images */
 @layer utilities {

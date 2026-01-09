@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://acey-crochets.com/sitemap.xml
+Sitemap: https://mwitibakers.com/sitemap.xml
 
 # Disallow admin and private routes
 Disallow: /secret-dashboard

@@ -37,9 +37,11 @@ function App() {
   if (checkingAuth) return <LoadingSpinner />;
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 text-[#4B0082] relative overflow-hidden">
-      {/* Background gradient fallback layer */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 pointer-events-none z-0" />
+    <div className="flex flex-col min-h-screen text-[var(--cream-50)] relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute -left-24 -top-32 w-72 h-72 bg-white/5 blur-3xl rounded-full" />
+        <div className="absolute right-0 top-10 w-80 h-80 bg-[var(--accent-mint)]/10 blur-3xl rounded-full" />
+      </div>
 
       <div className="relative z-50 flex flex-col min-h-screen">
         <Navbar />

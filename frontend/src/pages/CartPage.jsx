@@ -15,7 +15,7 @@ const CartPage = () => {
   const cartProductIds = cart.map(item => item._id);
 
   return (
-    <div className="py-8 md:py-16 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#E7C9FD] via-[#DAAFFC] to-[#F5E9FD] min-h-screen text-gray-900">
+    <div className="py-8 md:py-16 min-h-screen text-[var(--cream-50)]">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
           <motion.div
@@ -67,13 +67,13 @@ const EmptyCartUI = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
   >
-    <ShoppingCart className="h-24 w-24 text-[#C4B5FD]" />
-    <h3 className="text-2xl font-semibold text-[#6B21A8]">
+    <ShoppingCart className="h-24 w-24 text-[var(--accent-gold)]" />
+    <h3 className="text-2xl font-semibold">
       Your cart is empty
     </h3>
-    <p className="text-[#7E22CE]">Looks like you haven't added anything yet.</p>
+    <p className="text-white/75">Looks like you haven't added anything yet.</p>
     <Link
-      className="mt-4 rounded-md bg-[#A78BFA] px-6 py-2 text-white transition-colors hover:bg-[#8B5CF6]"
+      className="mt-4 pill-button rounded-full bg-[var(--accent-gold)] px-6 py-2 text-[var(--navy-900)] transition-colors hover:bg-[#eab54a]"
       to="/"
     >
       Start Shopping

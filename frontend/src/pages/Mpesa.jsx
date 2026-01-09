@@ -15,8 +15,8 @@ const steps = [
     title: "Snap Your Cart Page",
     description: (
       <>
-        Take a screenshot of your cart page showing the items you'd like to
-        order.
+        Take a screenshot of your cart page showing the cakes, pastries, or
+        treats you'd like to order.
       </>
     ),
   },
@@ -29,11 +29,10 @@ const steps = [
         with you directly about the following:
         <ul className="list-disc ml-6 mt-2 text-[#E7C9FD] text-sm">
           <li>
-            How you'd like your crochet items to look{" "}
-            <span className="italic">(customizations)</span>
+            Flavors, sizes, and any custom cake messages
           </li>
           <li>Payment details</li>
-          <li>How long it will take to complete your order</li>
+          <li>Pick-up or delivery preferences and timelines</li>
         </ul>
       </>
     ),
@@ -43,11 +42,11 @@ const steps = [
     title: "Order Confirmed!",
     description: (
       <>
-        Once everything is agreed on, sit back and relax while we handcraft your
-        beautiful crochet items.
+        Once everything is agreed on, sit back and relax while we bake your
+        order to perfection.
         <br />
         <span className="font-semibold text-[#FFD700]">
-          Thank you for supporting handmade!
+          Thank you for choosing Mwiti Bakers - Home of Sweetness!
         </span>
       </>
     ),
@@ -63,15 +62,15 @@ const Mpesa = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 min-h-screen bg-gradient-to-br from-[#F5E9FD] via-[#E7C9FD] to-[#DAAFFC]">
+    <div className="flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 min-h-screen text-[var(--cream-50)]">
       <motion.div
         className="sm:mx-auto sm:w-full sm:max-w-md"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-[#9B4D96] drop-shadow-lg flex items-center justify-center gap-2">
-          <ShoppingBasket className="inline-block h-8 w-8 text-[#BB86FC]" />
+        <h2 className="mt-6 text-center text-3xl font-extrabold drop-shadow-lg flex items-center justify-center gap-2">
+          <ShoppingBasket className="inline-block h-8 w-8 text-[var(--accent-gold)]" />
           Order Confirmation
         </h2>
       </motion.div>
@@ -82,7 +81,7 @@ const Mpesa = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="bg-[#3E1A47] py-10 px-4 sm:px-10 shadow-xl rounded-2xl text-[#D3BCC7] space-y-8">
+        <div className="glass-panel py-10 px-4 sm:px-10 shadow-xl rounded-2xl space-y-8">
           <ol className="space-y-8">
             {steps.map((step, idx) => (
               <motion.li
@@ -92,16 +91,16 @@ const Mpesa = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
-                whileHover={{ scale: 1.03, backgroundColor: "#4B225A" }}
+                whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.06)" }}
                 whileTap={{ scale: 0.98 }}
                 style={{ borderRadius: "1rem", padding: "0.5rem 0.75rem" }}
               >
                 <div className="flex-shrink-0">{step.icon}</div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#BB86FC] mb-1 group-hover:text-[#FFD700] transition-colors duration-200">
+                  <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[var(--accent-gold)] transition-colors duration-200">
                     {step.title}
                   </h3>
-                  <div className="text-base text-[#E7C9FD]">
+                  <div className="text-base text-white/80">
                     {step.description}
                   </div>
                 </div>
@@ -110,10 +109,10 @@ const Mpesa = () => {
           </ol>
 
           <motion.a
-            href="https://wa.me/254713552374"
+            href="https://wa.me/254757365203"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 w-full flex justify-center items-center px-6 py-3 border border-transparent text-lg font-semibold rounded-xl shadow-lg text-white bg-gradient-to-r from-[#9B4D96] to-[#BB86FC] hover:from-[#7F3F8C] hover:to-[#A78BFA] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9B4D96] transition-all duration-300"
+            className="mt-8 w-full flex justify-center items-center px-6 py-3 pill-button text-lg font-semibold rounded-full shadow-lg text-[var(--navy-900)] bg-[var(--accent-gold)] hover:bg-[#eab54a] transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             onClick={handleWhatsAppClick}
@@ -130,9 +129,9 @@ const Mpesa = () => {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.5 }}
             >
-              <Sparkles className="h-10 w-10 text-[#FFD700] mb-2 animate-pulse" />
-              <span className="text-lg font-bold text-[#FFD700] text-center">
-                Thanks for supporting Acey Crochet!
+              <Sparkles className="h-10 w-10 text-[var(--accent-gold)] mb-2 animate-pulse" />
+              <span className="text-lg font-bold text-[var(--accent-gold)] text-center">
+                Thanks for choosing Mwiti Bakers!
               </span>
             </motion.div>
           )}

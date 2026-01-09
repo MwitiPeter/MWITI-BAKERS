@@ -22,10 +22,10 @@ const AdminPage = () => {
   }, [fetchAllProducts]);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#E7C9FD] via-[#DAAFFC] to-[#F5E9FD] relative overflow-hidden text-gray-900">
+    <div className="min-h-screen relative overflow-hidden text-[var(--cream-50)]">
       <div className="relative z-10 container mx-auto px-4 py-16">
         <motion.h1
-          className="text-4xl font-bold mb-8 text-[#6B21A8] text-center"
+          className="text-4xl font-bold mb-8 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -38,10 +38,10 @@ const AdminPage = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center px-4 py-2 mx-2 rounded-md transition-colors duration-200 font-medium ${
+              className={`flex items-center px-4 py-2 mx-2 rounded-full transition-colors duration-200 font-semibold ${
                 activeTab === tab.id
-                  ? "bg-[#A78BFA] text-white shadow-md"
-                  : "bg-white text-[#6B21A8] border border-[#D8B4FE] hover:bg-[#F3E8FF]"
+                  ? "bg-[var(--accent-gold)] text-[var(--navy-900)] shadow-md"
+                  : "bg-transparent text-white border border-white/30 hover:bg-white/10"
               }`}
             >
               <tab.icon className="mr-2 h-5 w-5" />

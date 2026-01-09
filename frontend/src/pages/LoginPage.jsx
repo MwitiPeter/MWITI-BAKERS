@@ -22,10 +22,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1E1B2F] via-[#2D2A41] to-[#1E1B2F] flex items-center justify-center text-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center text-[var(--cream-50)] px-4">
       <div className="max-w-md w-full">
         <motion.h2
-          className="text-center text-3xl font-bold text-[#E7C9FD] mb-6"
+          className="text-center text-3xl font-bold mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -34,7 +34,7 @@ const LoginPage = () => {
         </motion.h2>
 
         <motion.div
-          className="bg-[#2D2A41] p-8 rounded-2xl shadow-lg"
+          className="glass-panel p-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -43,12 +43,12 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-[#D1D5DB]"
+                className="block text-sm font-medium text-white/80"
               >
                 Email address
               </label>
               <div className="relative mt-1">
-                <Mail className="absolute left-3 top-2.5 h-5 w-5 text-[#A1A6B1]" />
+                <Mail className="absolute left-3 top-2.5 h-5 w-5 text-white/60" />
                 <input
                   id="email"
                   type="email"
@@ -56,7 +56,7 @@ const LoginPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="you@example.com"
-                  className="w-full pl-10 pr-3 py-2 rounded-md bg-[#1E1B2F] border border-[#4B4A6B] placeholder-[#A1A6B1] focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] transition"
+                  className="w-full pl-10 pr-3 py-2 rounded-lg bg-[var(--navy-900)] border border-white/20 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 transition"
                 />
               </div>
             </div>
@@ -64,12 +64,12 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-[#D1D5DB]"
+                className="block text-sm font-medium text-white/80"
               >
                 Password
               </label>
               <div className="relative mt-1">
-                <Lock className="absolute left-3 top-2.5 h-5 w-5 text-[#A1A6B1]" />
+                <Lock className="absolute left-3 top-2.5 h-5 w-5 text-white/60" />
                 <input
                   id="password"
                   type="password"
@@ -77,7 +77,7 @@ const LoginPage = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-3 py-2 rounded-md bg-[#1E1B2F] border border-[#4B4A6B] placeholder-[#A1A6B1] focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] transition"
+                  className="w-full pl-10 pr-3 py-2 rounded-lg bg-[var(--navy-900)] border border-white/20 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 transition"
                 />
               </div>
             </div>
@@ -85,7 +85,7 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center py-2 px-4 bg-[#A78BFA] hover:bg-[#8B5CF6] text-white font-medium rounded-md shadow-md transition duration-150 disabled:opacity-50"
+              className="w-full flex items-center justify-center py-2 px-4 pill-button bg-[var(--accent-gold)] text-[var(--navy-900)] font-semibold rounded-full transition duration-150 disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -105,7 +105,7 @@ const LoginPage = () => {
             Not a member?{" "}
             <Link
               to="/signup"
-              className="font-medium text-[#E7C9FD] hover:underline inline-flex items-center"
+              className="font-semibold text-[var(--accent-gold)] hover:underline inline-flex items-center"
             >
               Sign up now <ArrowRight className="ml-1 h-4 w-4" />
             </Link>

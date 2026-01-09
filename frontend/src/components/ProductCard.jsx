@@ -30,8 +30,8 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="flex w-full relative flex-col overflow-hidden rounded-xl border border-purple-200 shadow-lg bg-white hover:shadow-2xl transition-all duration-300 hover:scale-105">
-      <div className="relative mx-3 mt-3 overflow-hidden rounded-xl bg-gray-50">
+    <div className="flex w-full relative flex-col overflow-hidden rounded-xl border border-white/10 shadow-xl bg-[var(--navy-900)] text-[var(--cream-50)] hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+      <div className="relative mx-3 mt-3 overflow-hidden rounded-xl bg-white/5">
         <ImageCarousel 
           images={getProductImages()} 
           aspectRatio="3/4"
@@ -39,22 +39,22 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="mt-4 px-5 pb-5 flex-1 flex flex-col">
-        <h5 className="text-lg sm:text-xl font-semibold tracking-tight text-gray-800 line-clamp-2 mb-2">
+        <h5 className="text-lg sm:text-xl font-semibold tracking-tight line-clamp-2 mb-2">
           {product.name}
         </h5>
-        <p className="text-sm text-gray-600 line-clamp-2 flex-1 mb-3">
+        <p className="text-sm text-white/70 line-clamp-2 flex-1 mb-3">
           {product.description}
         </p>
         <div className="mt-auto">
           <div className="mb-4 flex items-center justify-between">
             <p>
-              <span className="text-2xl sm:text-3xl font-bold text-purple-600">
+              <span className="text-2xl sm:text-3xl font-bold text-[var(--accent-gold)]">
                 KSh {product.price}
               </span>
             </p>
           </div>
           <button
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105 shadow-lg hover:shadow-xl"
+            className="w-full pill-button bg-[var(--accent-gold)] text-[var(--navy-900)] font-semibold py-3 px-4 rounded-full transition-all duration-300 flex items-center justify-center hover:-translate-y-[2px]"
             onClick={handleAddToCart}
           >
             <ShoppingCart size={20} className="mr-2" />

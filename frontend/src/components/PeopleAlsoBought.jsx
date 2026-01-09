@@ -39,7 +39,7 @@ const PeopleAlsoBought = ({ categories, excludedProductIds }) => {
 
   return (
     <div className="mt-12 px-6">
-      <h3 className="text-3xl font-bold text-[#F1F5F9] mb-4">
+      <h3 className="text-3xl font-bold text-white mb-4">
         People also bought
       </h3>
       <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

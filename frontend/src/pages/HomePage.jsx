@@ -6,23 +6,23 @@ import FeaturedProducts from "../components/FeaturedProducts";
 
 const categories = [
   {
-    href: "/accessories",
-    name: "Accessories",
-    imageUrl: "/accessories.jpg",
+    href: "/ourinfo",
+    name: "Our Info",
+    imageUrl: "/ourinfo.png",
   },
-  { href: "/bags", name: "Bags", imageUrl: "/bags.jpg" },
-  { href: "/tops", name: "Tops", imageUrl: "/tops.jpg" },
-  { href: "/dresses", name: "Dresses", imageUrl: "/dresses.jpg" },
+  { href: "/ourprices", name: "Our Prices", imageUrl: "/ourprices.png" },
+  { href: "/bentocupcakes", name: "Bento&Cupcakes", imageUrl: "/bentocupcakes.jpg" },
+  { href: "/bunsscones", name: "Buns & Scones", imageUrl: "/bunsscones.jpg" },
   {
-    href: "/two piece set",
-    name: "Two-Piece Set",
-    imageUrl: "/twopieceset.jpg",
+    href: "/orange",
+    name: "Orange Cake",
+    imageUrl: "/orange.jpg",
   },
-  { href: "/hats", name: "Hats", imageUrl: "/hats.jpg" },
-  { href: "/baby wear", name: "Baby Wear", imageUrl: "/babywear.jpg" },
-  { href: "/beach wear", name: "Beach Wear", imageUrl: "/beachwear.jpg" },
+  { href: "/animateddesign", name: "Animated Design", imageUrl: "/animateddesign.jpg" },
+  { href: "/ganachecake", name: "Ganache Cake", imageUrl: "/ganachecake.jpg" },
+  { href: "/layeredcake", name: "Layered Cake", imageUrl: "/layeredcake.jpg" },
 ];
-
+ 
 const HomePage = () => {
   const { fetchFeaturedProducts, products, loading } = useProductStore();
 
@@ -35,21 +35,22 @@ const HomePage = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-gradient-to-b from-purple-100 via-purple-200 to-purple-50 text-gray-900"
+      className="bg-transparent text-[var(--cream-50)]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        {/* Heading Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+        {/* Page Intro (kept minimal per request) */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-center mb-8 sm:mb-12"
+          transition={{ delay: 0.15, duration: 0.4 }}
+          className="text-center space-y-3"
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-800 mb-4">
-            Explore Our Categories
+          <p className="text-sm uppercase tracking-[0.2em] text-white/60">Mwiti Bakers</p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+            Explore Our Products
           </h1>
-          <p className="text-base sm:text-lg text-purple-600 max-w-2xl mx-auto">
-            Discover the latest trends in eco-friendly fashion
+          <p className="text-base sm:text-lg text-white/75 max-w-2xl mx-auto">
+            Home of Sweetness — Where We Make Memories. Discover cakes and pastries crafted for every celebration.
           </p>
         </motion.div>
 
@@ -65,6 +66,7 @@ const HomePage = () => {
               },
             },
           }}
+          id="categories"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
         >
           {categories.map((category, index) => (
@@ -85,9 +87,10 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            id="featured"
             className="mt-16 sm:mt-20"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-center text-purple-700 mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-8">
               Featured Products
             </h2>
             {products && products.length > 0 ? (

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines the comprehensive improvements made to product image handling across the AceyCrochet e-commerce application to ensure images fit well and are responsive in all views. **All images now display in portrait format without cropping any part of the image.**
+This document outlines the comprehensive improvements made to product image handling across the Mwiti Bakers e-commerce application to ensure images fit well and are responsive in all views. **All images now display in portrait format without cropping any part of the image.**
 
 ## Key Improvements Made
 

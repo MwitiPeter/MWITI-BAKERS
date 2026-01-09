@@ -10,16 +10,16 @@ const ImageCarousel = ({ images = [], aspectRatio = "3/4" }) => {
   if (!images || images.length === 0) {
     return (
       <div 
-        className="w-full bg-gray-100 rounded-lg flex items-center justify-center"
+        className="w-full bg-white/5 rounded-lg flex items-center justify-center"
         style={{ aspectRatio }}
       >
         <div className="text-center p-4">
-          <div className="w-16 h-16 mx-auto mb-2 text-gray-400">
+          <div className="w-16 h-16 mx-auto mb-2 text-white/60">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
             </svg>
           </div>
-          <span className="text-sm text-gray-400">No image available</span>
+          <span className="text-sm text-white/60">No image available</span>
         </div>
       </div>
     );
@@ -49,7 +49,7 @@ const ImageCarousel = ({ images = [], aspectRatio = "3/4" }) => {
 
   return (
     <div 
-      className="relative w-full overflow-hidden rounded-lg bg-gray-50"
+      className="relative w-full overflow-hidden rounded-lg bg-white/5"
       style={{ aspectRatio }}
     >
       <AnimatePresence mode="wait">
@@ -62,14 +62,14 @@ const ImageCarousel = ({ images = [], aspectRatio = "3/4" }) => {
           transition={{ duration: 0.3 }}
         >
           {imageError ? (
-            <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
+            <div className="w-full h-full flex items-center justify-center bg-white/5 rounded-lg">
               <div className="text-center p-4">
-                <div className="w-12 h-12 mx-auto mb-2 text-gray-400">
+                <div className="w-12 h-12 mx-auto mb-2 text-white/60">
                   <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                   </svg>
                 </div>
-                <span className="text-sm text-gray-400">Image not available</span>
+                <span className="text-sm text-white/60">Image not available</span>
               </div>
             </div>
           ) : (
@@ -95,14 +95,14 @@ const ImageCarousel = ({ images = [], aspectRatio = "3/4" }) => {
         <>
           <button
             onClick={handlePrevious}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full transition-all duration-200 shadow-md z-10 hover:shadow-lg"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white text-[var(--navy-900)] p-2 rounded-full transition-all duration-200 shadow-md z-10 hover:shadow-lg"
             aria-label="Previous image"
           >
             <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full transition-all duration-200 shadow-md z-10 hover:shadow-lg"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white text-[var(--navy-900)] p-2 rounded-full transition-all duration-200 shadow-md z-10 hover:shadow-lg"
             aria-label="Next image"
           >
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />

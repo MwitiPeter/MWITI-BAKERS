@@ -5,14 +5,14 @@ import { useProductStore } from "../stores/useProductStore";
 import toast from "react-hot-toast";
 
 const categories = [
-  "accessories",
-  "bags",
-  "tops",
-  "dresses",
-  "two piece set",
-  "hats",
-  "baby wear",
-  "beach wear",
+  "ourinfo",
+  "ourprices",
+  "bentocupcakes",
+  "bunsscones",
+  "orange",
+  "animateddesign",
+  "ganacheckae",
+  "layeredcake",
 ];
 
 const CreateProductForm = () => {
@@ -79,12 +79,12 @@ const CreateProductForm = () => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-[#1E1B2F] via-[#2D2A41] to-[#1E1B2F] shadow-lg rounded-lg p-8 mb-8 max-w-xl mx-auto"
+      className="glass-panel shadow-lg rounded-lg p-8 mb-8 max-w-xl mx-auto text-[var(--cream-50)]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <h2 className="text-center text-3xl font-bold text-[#E7C9FD] mb-6">
+      <h2 className="text-center text-3xl font-bold mb-6">
         Create New Product
       </h2>
 
@@ -104,7 +104,7 @@ const CreateProductForm = () => {
             onChange={(e) =>
               setNewProduct({ ...newProduct, name: e.target.value })
             }
-            className="mt-1 block w-full bg-[#1E1B2F] border border-[#4B4A6B] rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] focus:border-[#E7C9FD]"
+            className="mt-1 block w-full bg-[var(--navy-900)] border border-white/20 rounded-lg py-2 px-3 text-[var(--cream-50)] focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
             required
           />
         </div>
@@ -124,7 +124,7 @@ const CreateProductForm = () => {
               setNewProduct({ ...newProduct, description: e.target.value })
             }
             rows="3"
-            className="mt-1 block w-full bg-[#1E1B2F] border border-[#4B4A6B] rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] focus:border-[#E7C9FD]"
+            className="mt-1 block w-full bg-[var(--navy-900)] border border-white/20 rounded-lg py-2 px-3 text-[var(--cream-50)] focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
             required
           />
         </div>
@@ -138,7 +138,7 @@ const CreateProductForm = () => {
             Price
           </label>
           <div className="relative mt-1">
-            <span className="absolute left-3 top-2.5 text-[#D1D5DB] select-none">
+            <span className="absolute left-3 top-2.5 text-white/70 select-none">
               Ksh
             </span>
             <input
@@ -150,7 +150,7 @@ const CreateProductForm = () => {
               }
               step="0.01"
               min="0"
-              className="block w-full bg-[#1E1B2F] border border-[#4B4A6B] rounded-md py-2 pl-12 pr-3 text-white focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] focus:border-[#E7C9FD]"
+              className="block w-full bg-[var(--navy-900)] border border-white/20 rounded-lg py-2 pl-12 pr-3 text-[var(--cream-50)] focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
               required
             />
           </div>
@@ -170,7 +170,7 @@ const CreateProductForm = () => {
             onChange={(e) =>
               setNewProduct({ ...newProduct, category: e.target.value })
             }
-            className="mt-1 block w-full bg-[#1E1B2F] border border-[#4B4A6B] rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#E7C9FD] focus:border-[#E7C9FD]"
+            className="mt-1 block w-full bg-[var(--navy-900)] border border-white/20 rounded-lg py-2 px-3 text-[var(--cream-50)] focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
             required
           >
             <option value="">Select a category</option>
@@ -196,7 +196,7 @@ const CreateProductForm = () => {
           {/* Preview Images */}
           <div className="grid grid-cols-3 gap-4 mb-4">
             {newProduct.images.map((image, index) => (
-              <div key={index} className="relative bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center" style={{ aspectRatio: "3/4" }}>
+              <div key={index} className="relative bg-white/5 rounded-lg overflow-hidden flex items-center justify-center" style={{ aspectRatio: "3/4" }}>
                 <img
                   src={image}
                   alt={`Preview ${index + 1}`}
@@ -231,7 +231,7 @@ const CreateProductForm = () => {
               />
               <label
                 htmlFor="images"
-                className="cursor-pointer bg-[#1E1B2F] py-2 px-3 border border-[#4B4A6B] rounded-md shadow-sm text-sm font-medium text-[#D1D5DB] hover:bg-[#4A3A65] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E7C9FD]"
+                className="cursor-pointer bg-[var(--navy-900)] py-2 px-3 border border-white/20 rounded-lg shadow-sm text-sm font-medium text-white hover:bg-white/10"
               >
                 <Upload className="h-5 w-5 inline-block mr-2" />
                 Upload Images
@@ -243,7 +243,7 @@ const CreateProductForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full flex justify-center py-2 px-4 rounded-md text-sm font-medium text-white bg-[#A78BFA] hover:bg-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E7C9FD] disabled:opacity-50"
+          className="w-full flex justify-center py-2 px-4 pill-button rounded-full text-sm font-semibold text-[var(--navy-900)] bg-[var(--accent-gold)] hover:bg-[#eab54a] disabled:opacity-50"
           disabled={loading}
         >
           {loading ? (
