@@ -5,14 +5,14 @@ import { useProductStore } from "../stores/useProductStore";
 import toast from "react-hot-toast";
 
 const categories = [
-  "ourinfo",
-  "ourprices",
-  "bentocupcakes",
-  "bunsscones",
-  "orange",
-  "animateddesign",
-  "ganacheckae",
-  "layeredcake",
+  "Our Info",
+  "Our Prices",
+  "Bento&Cupcakes",
+  "Buns & Scones",
+  "Orange Cake",
+  "Animated Design",
+  "Ganache Cake",
+  "Layered Cake",
 ];
 
 const CreateProductForm = () => {

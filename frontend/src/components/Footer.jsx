@@ -107,7 +107,7 @@ const Footer = () => {
         <div className="space-y-3 text-center sm:text-left">
           <h3 className="text-base font-semibold">Our Mission</h3>
           <p className="text-sm text-white/75 leading-relaxed">
-            To create high-quality bakery products made with passion, integrity, and care—delivering unforgettable taste and freshness that keep celebrations sweet.
+            To make high-quality bakery products made with passion, integrity, and care—delivering unforgettable taste and freshness that keep celebrations sweet.
           </p>
         </div>
       </div>

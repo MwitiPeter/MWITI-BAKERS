@@ -29,6 +29,10 @@ const ProductCard = ({ product }) => {
     return ["/images/placeholder.svg"];
   };
 
+  // Check if product is in categories where we should hide cart button and price
+  const isInfoOrPriceCategory = product.category && 
+    (product.category === "Our Info" || product.category === "Our Prices");
+
   return (
     <div className="flex w-full relative flex-col overflow-hidden rounded-xl border border-white/10 shadow-xl bg-[var(--navy-900)] text-[var(--cream-50)] hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
       <div className="relative mx-3 mt-3 overflow-hidden rounded-xl bg-white/5">
@@ -46,20 +50,24 @@ const ProductCard = ({ product }) => {
           {product.description}
         </p>
         <div className="mt-auto">
-          <div className="mb-4 flex items-center justify-between">
-            <p>
-              <span className="text-2xl sm:text-3xl font-bold text-[var(--accent-gold)]">
-                KSh {product.price}
-              </span>
-            </p>
-          </div>
-          <button
-            className="w-full pill-button bg-[var(--accent-gold)] text-[var(--navy-900)] font-semibold py-3 px-4 rounded-full transition-all duration-300 flex items-center justify-center hover:-translate-y-[2px]"
-            onClick={handleAddToCart}
-          >
-            <ShoppingCart size={20} className="mr-2" />
-            Add to Cart
-          </button>
+          {!isInfoOrPriceCategory && (
+            <div className="mb-4 flex items-center justify-between">
+              <p>
+                <span className="text-2xl sm:text-3xl font-bold text-[var(--accent-gold)]">
+                  KSh {product.price}
+                </span>
+              </p>
+            </div>
+          )}
+          {!isInfoOrPriceCategory && (
+            <button
+              className="w-full pill-button bg-[var(--accent-gold)] text-[var(--navy-900)] font-semibold py-3 px-4 rounded-full transition-all duration-300 flex items-center justify-center hover:-translate-y-[2px]"
+              onClick={handleAddToCart}
+            >
+              <ShoppingCart size={20} className="mr-2" />
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

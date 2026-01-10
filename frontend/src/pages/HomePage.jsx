@@ -6,21 +6,21 @@ import FeaturedProducts from "../components/FeaturedProducts";
 
 const categories = [
   {
-    href: "/ourinfo",
+    href: "/Our Info",
     name: "Our Info",
     imageUrl: "/ourinfo.png",
   },
-  { href: "/ourprices", name: "Our Prices", imageUrl: "/ourprices.png" },
-  { href: "/bentocupcakes", name: "Bento&Cupcakes", imageUrl: "/bentocupcakes.jpg" },
-  { href: "/bunsscones", name: "Buns & Scones", imageUrl: "/bunsscones.jpg" },
+  { href: "/Our Prices", name: "Our Prices", imageUrl: "/ourprices.png" },
+  { href: "/Bento&Cupcakes", name: "Bento&Cupcakes", imageUrl: "/bentocupcakes.jpg" },
+  { href: "/Buns & Scones", name: "Buns & Scones", imageUrl: "/bunsscones.jpg" },
   {
-    href: "/orange",
+    href: "/Orange Cake",
     name: "Orange Cake",
     imageUrl: "/orange.jpg",
   },
-  { href: "/animateddesign", name: "Animated Design", imageUrl: "/animateddesign.jpg" },
-  { href: "/ganachecake", name: "Ganache Cake", imageUrl: "/ganachecake.jpg" },
-  { href: "/layeredcake", name: "Layered Cake", imageUrl: "/layeredcake.jpg" },
+  { href: "/Animated Design", name: "Animated Design", imageUrl: "/animateddesign.jpg" },
+  { href: "/Ganache Cake", name: "Ganache Cake", imageUrl: "/ganachecake.jpg" },
+  { href: "/Layered Cake", name: "Layered Cake", imageUrl: "/layeredcake.jpg" },
 ];
  
 const HomePage = () => {
