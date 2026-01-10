@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Trash, Star } from "lucide-react";
+import { Trash, Star, Edit } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import EditProductModal from "./EditProductModal";
 
 const ProductsList = () => {
   const {
@@ -12,6 +13,8 @@ const ProductsList = () => {
     error,
     fetchAllProducts,
   } = useProductStore();
+
+  const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
     fetchAllProducts();
@@ -136,18 +139,35 @@ const ProductsList = () => {
                   </button>
                 </td>
                 <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button
-                    onClick={() => deleteProduct(product._id)}
-                    className="text-[var(--accent-gold)] hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-all duration-200"
-                  >
-                    <Trash className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setEditingProduct(product)}
+                      className="text-[var(--accent-gold)] hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-all duration-200"
+                      title="Edit product"
+                    >
+                      <Edit className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </button>
+                    <button
+                      onClick={() => deleteProduct(product._id)}
+                      className="text-red-400 hover:text-red-300 p-1.5 rounded-full hover:bg-white/10 transition-all duration-200"
+                      title="Delete product"
+                    >
+                      <Trash className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      
+      {editingProduct && (
+        <EditProductModal
+          product={editingProduct}
+          onClose={() => setEditingProduct(null)}
+        />
+      )}
     </motion.div>
   );
 };

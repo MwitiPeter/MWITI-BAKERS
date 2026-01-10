@@ -163,6 +163,72 @@ export const getProductsByCategory = async (req, res) => {
   }
 };
 
+export const updateProduct = async (req, res) => {
+  try {
+    const { name, description, price, images, category } = req.body;
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Handle image updates
+    let updatedImages = [];
+    if (images && images.length > 0) {
+      if (images.length > 3) {
+        return res.status(400).json({ message: "Maximum 3 images allowed per product" });
+      }
+
+      // Check which images are new (base64 encoded) vs existing URLs
+      for (const image of images) {
+        if (image.startsWith('http')) {
+          // Existing image URL
+          updatedImages.push(image);
+        } else {
+          // New image - upload to cloudinary
+          const cloudinaryResponse = await cloudinary.uploader.upload(image, {
+            folder: "products",
+          });
+          updatedImages.push(cloudinaryResponse.secure_url);
+        }
+      }
+
+      // Delete old images from cloudinary that are no longer used
+      if (product.images && product.images.length > 0) {
+        for (const oldImageUrl of product.images) {
+          if (!updatedImages.includes(oldImageUrl)) {
+            const publicId = oldImageUrl.split("/").pop().split(".")[0];
+            try {
+              await cloudinary.uploader.destroy(`products/${publicId}`);
+            } catch (error) {
+              console.log("error deleting old image from cloudinary", error);
+            }
+          }
+        }
+      }
+    }
+
+    // Update product fields
+    product.name = name || product.name;
+    product.description = description || product.description;
+    product.price = price || product.price;
+    product.category = category || product.category;
+    product.images = updatedImages.length > 0 ? updatedImages : product.images;
+
+    const updatedProduct = await product.save();
+
+    // Update cache if the product is featured
+    if (updatedProduct.isFeatured) {
+      await updateFeaturedProductsCache();
+    }
+
+    res.json(updatedProduct);
+  } catch (error) {
+    console.log("Error in updateProduct controller", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 export const toggleFeaturedProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
