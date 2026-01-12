@@ -37,7 +37,7 @@ const Navbar = () => {
                 Mwiti Bakers
               </span>
               <span className="block text-xs sm:text-sm text-white/70">
-                Home of Sweetness — Where We Make Memories.
+                Home of Sweetness — Where We Make Lasting Memories.
               </span>
             </div>
           </Link>

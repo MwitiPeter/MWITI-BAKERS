@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="space-y-2 text-center sm:text-left">
           <h2 className="text-lg font-bold tracking-tight">Mwiti Bakers</h2>
           <p className="text-xs sm:text-sm text-white/70">
-            Home of Sweetness — Where We Make Memories.
+            Home of Sweetness — Where We Make Lasting Memories.
           </p>
           <div className="flex flex-wrap justify-center sm:justify-start gap-3 pt-2 text-[var(--cream-50)]">
             <a

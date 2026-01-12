@@ -11,7 +11,7 @@ const categories = [
     imageUrl: "/ourinfo.png",
   },
   { href: "/Our Prices", name: "Our Prices", imageUrl: "/ourprices.png" },
-  { href: "/Bento&Cupcakes", name: "Bento&Cupcakes", imageUrl: "/bentocupcakes.jpg" },
+  { href: "/Bento & Cupcakes", name: "Bento & Cupcakes", imageUrl: "/bentocupcakes.jpg" },
   { href: "/Buns & Scones", name: "Buns & Scones", imageUrl: "/bunsscones.jpg" },
   {
     href: "/Orange Cake",
@@ -50,7 +50,7 @@ const HomePage = () => {
             Explore Our Products
           </h1>
           <p className="text-base sm:text-lg text-white/75 max-w-2xl mx-auto">
-            Home of Sweetness — Where We Make Memories. Discover cakes and pastries crafted for every celebration.
+            Home of Sweetness — Where We Make Lasting Memories. Discover cakes and pastries crafted for every celebration.
           </p>
         </motion.div>
 
