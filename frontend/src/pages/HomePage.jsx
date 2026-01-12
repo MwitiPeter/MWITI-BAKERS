@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import CategoryItem from "../components/CategoryItem";
 import { useProductStore } from "../stores/useProductStore";
 import FeaturedProducts from "../components/FeaturedProducts";
+import { preloadImages } from "../utils/imageUtils";
 
 const categories = [
   {
@@ -28,6 +29,10 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchFeaturedProducts();
+    
+    // Preload first 4 category images for faster display
+    const criticalImages = categories.slice(0, 4).map(cat => cat.imageUrl);
+    preloadImages(criticalImages);
   }, [fetchFeaturedProducts]);
 
   return (

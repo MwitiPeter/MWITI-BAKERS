@@ -79,7 +79,9 @@ const ImageCarousel = ({ images = [], aspectRatio = "3/4" }) => {
               className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300"
               onError={handleImageError}
               onLoad={handleImageLoad}
-              loading="lazy"
+              loading={currentIndex === 0 ? "eager" : "lazy"}
+              decoding="async"
+              fetchpriority={currentIndex === 0 ? "high" : "auto"}
               style={{ 
                 maxWidth: '100%', 
                 maxHeight: '100%',

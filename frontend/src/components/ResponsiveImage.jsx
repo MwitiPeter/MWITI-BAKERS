@@ -63,6 +63,7 @@ const ResponsiveImage = ({
           alt={alt || "Product image"}
           className={imageClasses}
           loading={loading}
+          decoding="async"
           onError={handleImageError}
           onLoad={handleImageLoad}
           style={{ 

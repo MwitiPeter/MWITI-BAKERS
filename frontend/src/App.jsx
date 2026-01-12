@@ -1,20 +1,22 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import SignUpPage from "./pages/SignUpPage";
-import LoginPage from "./pages/LoginPage";
-import AdminPage from "./pages/AdminPage";
-import CategoryPage from "./pages/CategoryPage";
-import Mpesa from "./pages/Mpesa";
+import { lazy, Suspense, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { useUserStore } from "./stores/useUserStore";
-import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
-import CartPage from "./pages/CartPage";
 import { useCartStore } from "./stores/useCartStore";
-import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
-import PurchaseCancelPage from "./pages/PurchaseCancelPage";
+
+// Lazy load route components for better code splitting
+const HomePage = lazy(() => import("./pages/HomePage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const Mpesa = lazy(() => import("./pages/Mpesa"));
+const CartPage = lazy(() => import("./pages/CartPage"));
+const PurchaseSuccessPage = lazy(() => import("./pages/PurchaseSuccessPage"));
+const PurchaseCancelPage = lazy(() => import("./pages/PurchaseCancelPage"));
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -46,8 +48,9 @@ function App() {
       <div className="relative z-50 flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow pt-24">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
             <Route
               path="/signup"
               element={!user ? <SignUpPage /> : <Navigate to="/" />}
@@ -85,7 +88,8 @@ function App() {
               path="/mpesa"
               element={user ? <Mpesa /> : <Navigate to="/login" />}
             />
-          </Routes>
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>

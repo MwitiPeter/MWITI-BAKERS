@@ -16,6 +16,7 @@ const CategoryItem = ({ category }) => {
               alt={category.name}
               className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 group-hover:opacity-90"
               loading="lazy"
+              decoding="async"
               onError={handleImageError}
               style={{ 
                 maxWidth: '100%', 
