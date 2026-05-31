@@ -73,9 +73,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://mwitibakers.onrender.com/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/"
               aria-label="Website"
               className="hover:text-[var(--accent-gold)] transition-colors"
             >
