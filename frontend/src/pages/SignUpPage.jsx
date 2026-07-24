@@ -17,8 +17,7 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!"); // or a more user-friendly validation message
-      return;
+      return; // store handles the toast error
     }
     signup(formData);
   };

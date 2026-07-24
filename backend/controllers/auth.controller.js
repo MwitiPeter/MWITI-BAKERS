@@ -1,6 +1,8 @@
-import { redis } from '../lib/redis.js'
 import User from "../models/user.model.js"
 import jwt from "jsonwebtoken"
+
+// In-memory refresh token store — no Redis needed
+const refreshTokenStore = new Map()
 
 const generateTokens = (userId) => {
     const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
@@ -11,9 +13,16 @@ const generateTokens = (userId) => {
     })
     return { accessToken, refreshToken}
 }
-const storeRefreshToken = async(userId,refreshToken) => {
-    await redis.set(`refresh_token:${userId}`,refreshToken,"EX",7*24*60*60)//7days
 
+const storeRefreshToken = async(userId,refreshToken) => {
+    refreshTokenStore.set(`refresh_token:${userId}`, refreshToken)
+    // Auto-expire after 7 days (same as JWT expiry)
+    setTimeout(() => {
+        const current = refreshTokenStore.get(`refresh_token:${userId}`)
+        if (current === refreshToken) {
+            refreshTokenStore.delete(`refresh_token:${userId}`)
+        }
+    }, 7 * 24 * 60 * 60 * 1000)
 }
 
 const setCookies = (res, accessToken, refreshToken) => {
@@ -62,10 +71,8 @@ export const signup = async(req, res) => {
 
 export const login = async(req, res) => {
     try{
-        // console.log("here runs the login")
         const {email,password} = req.body
         const user = await User.findOne({email})
-        // console.log("here runs login2")
 
         if(user && ( await user.comparePassword(password))){
             const{accessToken,refreshToken} = generateTokens(user._id)
@@ -86,7 +93,6 @@ export const login = async(req, res) => {
         console.log("Error in login controller", error.message)
         res.status(500).json({ message: error.message })
     }
-    // res.send ("login route called")
 }
 
 export const logout = async(req, res) => {
@@ -94,7 +100,7 @@ export const logout = async(req, res) => {
         const refreshToken = req.cookies.refreshToken
         if(refreshToken){
             const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
-            await redis.del(`refresh_token:${decoded.userId}`)
+            refreshTokenStore.delete(`refresh_token:${decoded.userId}`)
         }
 
         res.clearCookie("accessToken")
@@ -104,7 +110,6 @@ export const logout = async(req, res) => {
         console.log("Error in logout controller", error.message)
         res.status(500).json({ message: "Server error", error: error.message })
     }
-    // res.send ("logout route called")
 }
 
 // this will recreate an access token
@@ -115,7 +120,7 @@ export const refreshToken = async (req,res) => {
             return res.status(401).json({ message: "No refreshtoken provided"})
         }
         const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
-        const storedToken = await redis.get(`refresh_token:${decoded.userId}`)
+        const storedToken = refreshTokenStore.get(`refresh_token:${decoded.userId}`)
 
         if(storedToken !== refreshToken){
             return res.status(401).json({ message: "Invalid refresh token"})

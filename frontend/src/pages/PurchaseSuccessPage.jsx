@@ -1,30 +1,30 @@
-import { ArrowRight, XCircle, HandHeart } from "lucide-react";
-import { Link } from "react-router-dom";
-import React from "react";
+import { ArrowRight, CheckCircle, HandHeart } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const PurchaseSuccessPage = () => {
+  const location = useLocation();
+  const orderData = location.state?.orderData;
+  const orderId = orderData?.orderId || location.state?.reference || "N/A";
+
   return (
     <div className="h-screen flex items-center justify-center px-4 text-[var(--cream-50)]">
       <div className="max-w-md w-full glass-panel rounded-lg shadow-xl overflow-hidden relative z-10">
         <div className="p-6 sm:p-8">
           <div className="flex justify-center">
-            <XCircle className="text-[var(--accent-gold)] w-16 h-16 mb-4" />
+            <CheckCircle className="text-[var(--accent-gold)] w-16 h-16 mb-4" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">
-            This Payment System is Coming oon !!!
+            Order Placed Successfully!
           </h1>
 
-          <p className="text-white/80 text-center mb-2">
-            You can Continue with Mpesa Checkout Button in the Cart Page
-          </p>
-          <p className="text-white/70 text-center text-sm mb-6">
-            Then follow the instructions to complete your purchase.
+          <p className="text-white/80 text-center mb-6">
+            Thank you for your order! You will be redirected to complete payment via Mpesa.
           </p>
           <div className="bg-white/5 rounded-lg p-4 mb-6">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-white/80">Order number</span>
               <span className="text-sm font-semibold text-[var(--accent-gold)]">
-                #12345
+                {orderId !== "N/A" ? `#${orderId.slice(-6)}` : "N/A"}
               </span>
             </div>
             <div className="flex items-center justify-between">

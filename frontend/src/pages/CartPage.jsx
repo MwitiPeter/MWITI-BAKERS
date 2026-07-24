@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartStore } from "../stores/useCartStore";
 import { motion } from "framer-motion";
@@ -5,10 +6,22 @@ import { ShoppingCart } from "lucide-react";
 import CartItem from "../components/CartItem";
 import PeopleAlsoBought from "../components/PeopleAlsoBought";
 import OrderSummary from "../components/OrderSummary";
-import GiftCouponCard from "../components/GiftCouponCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const CartPage = () => {
-  const { cart } = useCartStore();
+  const { cart, getCartItems } = useCartStore();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      setLoading(true);
+      await getCartItems();
+      setLoading(false);
+    };
+    fetchCart();
+  }, [getCartItems]);
+
+  if (loading) return <LoadingSpinner />;
 
   // Determine categories and product IDs for recommendations based on cart items
   const cartCategories = [...new Set(cart.map(item => item.category))];
@@ -49,7 +62,6 @@ const CartPage = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <OrderSummary />
-              <GiftCouponCard />
             </motion.div>
           )}
         </div>

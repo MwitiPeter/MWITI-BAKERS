@@ -52,6 +52,11 @@ export const useCartStore = create(
 				}
 			},
 			clearCart: async () => {
+				try {
+					await axios.delete("/cart", { data: {} });
+				} catch (error) {
+					console.error("Error clearing cart on server:", error);
+				}
 				set({ cart: [], coupon: null, total: 0, subtotal: 0 });
 			},
 			addToCart: async (product) => {

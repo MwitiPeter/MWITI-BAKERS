@@ -1,4 +1,3 @@
-import { redis } from "../lib/redis.js";
 import cloudinary from "../lib/cloudinary.js";
 import Product from "../models/product.model.js";
 import mongoose from "mongoose";
@@ -15,17 +14,7 @@ export const getAllProducts = async (req, res) => {
 
 export const getFeaturedProducts = async (req, res) => {
   try {
-    // Always fetch from MongoDB first to ensure we have the latest data
     const featuredProducts = await Product.find({ isFeatured: true }).lean();
-
-    // Update the Redis cache with the latest data
-    if (featuredProducts.length === 0) {
-      await redis.del("featured_products");
-      return res.json([]);
-    }
-
-    // Store in redis for future quick access
-    await redis.set("featured_products", JSON.stringify(featuredProducts));
     res.json(featuredProducts);
   } catch (error) {
     console.log("Error in getFeaturedProducts controller", error.message);
@@ -92,9 +81,6 @@ export const deleteProduct = async (req, res) => {
     }
 
     await Product.findByIdAndDelete(req.params.id);
-
-    // Update the featured products cache after deletion
-    await updateFeaturedProductsCache();
 
     res.json({ message: "Product deleted successfully" });
   } catch (error) {
@@ -217,11 +203,6 @@ export const updateProduct = async (req, res) => {
 
     const updatedProduct = await product.save();
 
-    // Update cache if the product is featured
-    if (updatedProduct.isFeatured) {
-      await updateFeaturedProductsCache();
-    }
-
     res.json(updatedProduct);
   } catch (error) {
     console.log("Error in updateProduct controller", error.message);
@@ -235,7 +216,6 @@ export const toggleFeaturedProduct = async (req, res) => {
     if (product) {
       product.isFeatured = !product.isFeatured;
       const updatedProduct = await product.save();
-      await updateFeaturedProductsCache();
       res.json(updatedProduct);
     } else {
       res.status(404).json({ message: "Product not found" });
@@ -246,15 +226,4 @@ export const toggleFeaturedProduct = async (req, res) => {
   }
 };
 
-async function updateFeaturedProductsCache() {
-  try {
-    const featuredProducts = await Product.find({ isFeatured: true }).lean();
-    if (featuredProducts.length === 0) {
-      await redis.del("featured_products");
-    } else {
-      await redis.set("featured_products", JSON.stringify(featuredProducts));
-    }
-  } catch (error) {
-    console.log("error in update cache function");
-  }
-}
+

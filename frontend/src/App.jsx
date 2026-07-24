@@ -17,6 +17,7 @@ const Mpesa = lazy(() => import("./pages/Mpesa"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const PurchaseSuccessPage = lazy(() => import("./pages/PurchaseSuccessPage"));
 const PurchaseCancelPage = lazy(() => import("./pages/PurchaseCancelPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -88,6 +89,7 @@ function App() {
               path="/mpesa"
               element={user ? <Mpesa /> : <Navigate to="/login" />}
             />
+            <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </main>

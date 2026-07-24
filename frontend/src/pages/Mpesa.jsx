@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useCartStore } from "../stores/useCartStore";
+import axios from "../lib/axios";
+import toast from "react-hot-toast";
 import {
   MessageCircleHeart,
   Camera,
@@ -7,6 +11,7 @@ import {
   CheckCircle,
   Sparkles,
   ShoppingBasket,
+  Loader,
 } from "lucide-react";
 
 const steps = [
@@ -54,11 +59,57 @@ const steps = [
 ];
 
 const Mpesa = () => {
+  const [isProcessing, setIsProcessing] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
+  const navigate = useNavigate();
+  const { cart, clearCart, coupon } = useCartStore();
 
-  const handleWhatsAppClick = () => {
-    setShowThanks(true);
-    setTimeout(() => setShowThanks(false), 3500);
+  const handleWhatsAppClick = async () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
+    try {
+      // Open WhatsApp in a new tab first
+      window.open("https://wa.me/254757365203", "_blank", "noopener,noreferrer");
+
+      // Create the order via the backend
+      const sessionRes = await axios.post("/payments/create-checkout-session", {
+        products: cart,
+        couponCode: coupon?.code || null,
+      });
+
+      const { session } = sessionRes.data;
+
+      const successRes = await axios.post("/payments/checkout-success", {
+        session,
+      });
+
+      const orderId = successRes.data?.orderId;
+
+      // Clear the cart
+      await clearCart();
+
+      // Navigate to success page with real order data
+      navigate("/purchase-success", {
+        state: {
+          orderData: {
+            orderId,
+            reference: session.id,
+            date: new Date().toISOString(),
+          },
+        },
+      });
+
+      toast.success("Order placed successfully!");
+    } catch (error) {
+      console.error("Error processing order:", error);
+      toast.error("Something went wrong while placing your order. Please try again.");
+      navigate("/cart");
+    } finally {
+      setIsProcessing(false);
+      setShowThanks(true);
+      setTimeout(() => setShowThanks(false), 3500);
+    }
   };
 
   return (
@@ -108,20 +159,27 @@ const Mpesa = () => {
             ))}
           </ol>
 
-          <motion.a
-            href="https://wa.me/254757365203"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 w-full flex justify-center items-center px-6 py-3 pill-button text-lg font-semibold rounded-full shadow-lg text-[var(--navy-900)] bg-[var(--accent-gold)] hover:bg-[#eab54a] transition-all duration-300"
+          <motion.button
+            disabled={isProcessing}
+            className="mt-8 w-full flex justify-center items-center px-6 py-3 pill-button text-lg font-semibold rounded-full shadow-lg text-[var(--navy-900)] bg-[var(--accent-gold)] hover:bg-[#eab54a] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             onClick={handleWhatsAppClick}
           >
-            <MessageCircleHeart className="h-6 w-6 mr-3 animate-bounce" />
-            Send Screenshot via WhatsApp
-          </motion.a>
+            {isProcessing ? (
+              <>
+                <Loader className="h-6 w-6 mr-3 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              <>
+                <MessageCircleHeart className="h-6 w-6 mr-3 animate-bounce" />
+                Send Screenshot via WhatsApp
+              </>
+            )}
+          </motion.button>
 
-          {showThanks && (
+          {showThanks && !isProcessing && (
             <motion.div
               className="mt-6 flex flex-col items-center justify-center"
               initial={{ opacity: 0, scale: 0.8 }}

@@ -84,7 +84,7 @@ const AnalyticsTab = () => {
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={dailySalesData}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.15)" />
-            <XAxis dataKey="name" stroke="#ffffff" />
+            <XAxis dataKey="date" stroke="#ffffff" />
             <YAxis yAxisId="left" stroke="#ffffff" />
             <YAxis yAxisId="right" orientation="right" stroke="#ffffff" />
             <Tooltip />
