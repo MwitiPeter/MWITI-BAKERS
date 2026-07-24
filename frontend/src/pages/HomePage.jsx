@@ -73,6 +73,7 @@ const HomePage = () => {
               Buy Recipe
             </a>
           </motion.div>
+        </motion.div>
 
         {/* Category Grid */}
         <motion.div
