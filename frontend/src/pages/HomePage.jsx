@@ -57,7 +57,22 @@ const HomePage = () => {
           <p className="text-base sm:text-lg text-white/75 max-w-2xl mx-auto">
             Home of Sweetness — Where We Make Lasting Memories. Discover cakes and pastries crafted for every celebration.
           </p>
-        </motion.div>
+
+          {/* Buy Recipe Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+          >
+            <a
+              href="https://mwitibakers.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-6 px-8 py-3 rounded-full bg-[var(--accent-gold)] text-[var(--navy-900)] font-semibold text-base shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:brightness-110 active:scale-95"
+            >
+              Buy Recipe
+            </a>
+          </motion.div>
 
         {/* Category Grid */}
         <motion.div
